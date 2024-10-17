@@ -1,0 +1,1732 @@
+# LSL keywords updated 19 Aug 2009 for LSL 1.23.4 by http://adammarker.org/shill
+# logic flow words, comment these out with # if it gets annoying!
+fenir(isAwsome=TRUE)
+for(initializer; test; iteration):{:   statements:}
+do do loop:do:{:   statements:} while (test);
+while(test) loop:{    statements:}
+if(test):{    statements:}
+else else clause:if (test):{    statements:}:else:{    statements:}
+jump jump statement:jump label jump to @somelabel
+return leave current function or event handler
+default Name of default state that all scripts must have
+# TYPES
+TYPES(this)text
+state Keyword to indicate state block or state transition
+integer Integer singed type integer myint=1;
+float Floating-point type float myfloat=0.0;
+string String type string mystring="stuff";
+key Key type.  Use NULL_KEY to test for empty keys are strings 
+vector Vector type of 3 floats. <0.0,0.0,0.0>;  Used to represent 3D motion, Euler angles, and color.:Access components by .x, .y. or .z
+rotation Rotation type of 4 floats. <0.0,0.0,0.0,0.0>; Used to represent rotation.:Access components by .x, .y., .z, or .w
+list List of various data types list mylist=[1,"two"];
+quaternion Rotation type of 4 floats. <0.0,0.0,0.0,0.0> Used to represent rotation.:Access components by .x, .y, .z, or .w
+# float constants
+PI   3.1415926535897932384626433832795
+TWO_PI  6.283185307179586476925286766559
+PI_BY_TWO  1.5707963267948966192313216916398
+DEG_TO_RAD To convert from degrees to radians
+RAD_TO_DEG To convert from radians to degrees
+SQRT2   1.4142135623730950488016887242097
+# compound constants
+ZERO_VECTOR <0.0, 0.0, 0.0>
+ZERO_ROTATION <0.0, 0.0, 0.0, 1.0>
+# EVENTS
+EVENTS(this)text
+at_rot_target(integer tnum, rotation targetrot, rotation ourrot)Result of LLRotTarget library function call
+at_target(integer tnum, vector targetpos, vector ourpos)Result of llTarget library function call
+attach(key id)Triggered when task attaches or detaches from agent
+changed( integer change )Triggered various event change the task:(test change with CHANGED_INVENTORY, CHANGED_COLOR, CHANGED_SHAPE, CHANGED_SCALE, CHANGED_TEXTURE, CHANGED_LINK, CHANGED_ALLOWED_DROP, CHANGED_OWNER, CHANGED_REGION, CHANGED_TELEPORT, CHANGED_REGION_START, CHANGED_MEDIA)
+collision(integer num_detected)Triggered while task is colliding with another task
+collision_end(integer num_detected)Triggered when task stops colliding with another task
+collision_start(integer num_detected)Triggered when task starts colliding with another task
+control(key id, integer level, integer edge)Result of llTakeControls library function call
+dataserver(key queryid, string data)Triggered when task receives asynchronous data
+email(string time, string address, string subj, string message, integer num_left)Triggered when task receives email
+experience_permissions(key agent) Triggered when agent has approved an experience permissions request. This may be through interaction with the experience permission dialog or the experience profile, or automatically if the agent has previously approved the experience.
+experience_permissions_denied(key agent, integer reason) Triggered when agent has denied experience permission. reason is the reason for denial; one of the Experience Tools XP_ERROR_* errors flags.
+final_damage(integer num_detected) This event is triggered after all on_damage events in all scripts and attachments have processed and damage has been applied to the avatar or distributed to all seated avatars.
+game_control(key id, integer button_levels, list axes): triggered when compatible viewer (not yet implemented in the Cool VL Viewer), sends fresh GameControlInput message, but only for scripts on attachments or seat.
+http_request(key id, string method, string body)Triggered when task receives an http request against a public URL
+http_response(key request_id, integer status, list metadata, string body)Triggered when task receives a response to one of its llHTTPRequests
+land_collision(vector pos)Triggered when task is colliding with land
+land_collision_end(vector pos)Triggered when task stops colliding with land
+land_collision_start(vector pos)Triggered when task starts colliding with land
+link_message(integer sender_num, integer num, string str, key id)Triggered when task receives a link message via LLMessageLinked library function call
+linkset_data(integer action, string name, string value):triggered whenever the linkset data storage is changed.
+listen(integer channel, string name, key id, string message)Result of the llListen library function call
+money(key id, integer amount)Triggered when L$ is given to task
+moving_end()Triggered when task stops moving
+moving_start()Triggered when task begins moving
+no_sensor()Result of the llSensor library function call
+not_at_rot_target()Result of LLRotTarget library function call
+not_at_target()Result of llTarget library function call
+object_rez(key id)Triggered when task rezzes in another task
+on_damage(integer num_detected) This event is triggered when damage has been inflicted on an avatar or task in the world but before damage has been applied or distributed.
+on_death() This event is triggered on all attachments worn by an avatar when that avatar's health reaches 0.
+on_rez(integer start_param)Triggered when task is rezzed in from inventory or another task
+path_update(integer type, list reserved)Triggered when the state of a pathfinder character changes. Note; "list reserved" is not currently used
+remote_data(integer event_type, key channel, key message_id, string sender,integer idata, string sdata)Triggered by various XML-RPC calls (event_type will be one of REMOTE_DATA_CHANNEL, REMOTE_DATA_REQUEST, REMOTE_DATA_REPLY)
+run_time_permissions(integer perm)Triggered when an agent grants run time permissions to task
+sensor(integer num_detected)Result of the llSensor library function call
+state_entry()Triggered on any state transition and startup
+state_exit()Triggered on any state transition
+timer()Result of the llSetTimerEvent library function call
+touch(integer num_detected)Triggered while agent is clicking on task
+touch_end(integer num_detected)Triggered when agent stops clicking on task
+touch_start(integer num_detected)Triggered by the start of agent clicking on task
+transaction_result(key id, integer success, string data) Triggered when currency is given to task
+# built in fucntions some only apply to opensim....
+BUILTINS(this) text
+llAbs(integer val)[integer] 
+llAcos(float val)[float] Returns the arccosine in radians of val
+llAddToLandBanList(key avatar, float hours)Add avatar to the land ban list for hours
+llAddToLandPassList(key avatar, float hours)Add avatar to the land pass list for hours
+llAdjustDamage  llAdjustDamage(integer type float damage Modifies the amount of 'damage' of 'type' that will be applied by the current on_damage event after it has completed processing. 
+llAdjustSoundVolume(float volume)adjusts volume of attached sound (0.0 - 1.0)
+llAgentInExperience integer llAgentInExperience(key agent Determines whether or not the specified agent is in the script's experience. 
+llAllowInventoryDrop(integer add)If add == TRUE, users without permissions can still drop inventory items onto task
+llAngleBetween(rotation a, rotation b)[float] Returns angle between rotation a and b
+llApplyImpulse(vector force, integer local)applies impulse to object, in local coords if local == TRUE (if the script is physical)
+llApplyRotationalImpulse(vector force, integer local)applies rotational impulse to object, in local coords if local == TRUE (if the script is physical)
+llAsin(float val)[float] Returns the arcsine in radians of val
+llAtan2(float y, float x)[float] 
+llAttachToAvatar(integer attachment)Attach to avatar task has permissions for at point attachment
+llAttachToAvatarTemp llAttachToAvatarTemp(integer attach_point Attaches the object on attach_point to the avatar who has granted permission to the script. The object will not create new inventory for the user, and will disappear on detach or disconnect. 
+llAvatarOnLinkSitTarget key llAvatarOnLinkSitTarget(integer link Returns a key that is the UUID of the user seated on the 'link'ed prim. Equivalent to calling llAvatarOnSitTarget on link prim in the link set. 
+llAvatarOnSitTarget()[key] If an avatar is sitting on the sit target, return the avatar's key, NULL_KEY otherwise
+llAxes2Rot(vector fwd, vector left, vector up)[rotation] returns the rotation defined by the coordinate axes
+llAxisAngle2Rot(vector axis, float angle)[rotation] Returns the rotation generated angle about axis
+llBase64ToInteger(string str)[integer] Big endian decode of a Base64 string into an integer.
+llBase64ToString(string str)[string] Converts a Base 64 string to a conventional string.  If the conversion creates any unprintable characters, they are converted to spaces.
+llBreakAllLinks()Delinks all tasks in the link set (requires permission PERMISSION_CHANGE_LINKS be set)
+llBreakLink(integer linknum)Delinks the task with the given link number (requires permission PERMISSION_CHANGE_LINKS be set)
+llCastRay list llCastRay(vector start, vector end, list options Cast a ray from start to end and report collision data for intersections with objects. 
+llCeil(float val)[integer] returns smallest integer value >= val
+llChar string llChar(integer val Construct a single UTF-32 character string from the supplied Unicode value. Returns "?" (Unicode 0x0F) if val is negative. 
+llClearCameraParams()Resets all camera parameters to default values and turns off scripted camera control.
+llClearLinkMedia integer llClearLinkMedia(integer link, integer face Clears (deletes) the media and all params from the given face on the linked prim(s). Returns an integer that is flag (STATUS_OK when sucessful, another of the STATUS_* flags on failure) which details the success/failure of the operation(s). 
+llClearPrimMedia (integer face Clears (deletes) the media and all params from the given face. sleeps for 1 
+llCloseRemoteDataChannel(key channel)Closes XML-RPC channel.
+llCloud(vector v)[float] returns the cloud density at the object position + v
+llCollisionFilter(string name, key id, integer accept)if accept == TRUE, only accept collisions with objects name and id (either is optional), otherwise with objects not name or id
+llCollisionSound(string impact_sound, float impact_volume)Suppress default collision sounds, replace default impact sounds with impact_sound (empty string to just suppress)
+llCollisionSprite(string impact_sprite)Suppress default collision sprites, replace default impact sprite with impact_sprite (empty string to just suppress)
+llComputeHash string llComputeHash(string message, string algorithm Returns a string hex-encoded hash digest of "message" using cryptographic "algorithm" (among md5, md5_sha1, sha1, sha224, sha256, sha384 and sha512). 
+llCos(float theta)[float] theta in radians
+llCreateCharacter llCreateCharacter(list options Creates a pathfinding entity, known as a "character", from the object containing the script. Required to activate use of pathfinding functions. 'options' is a list containing the configuration options (CHARACTER_DESIRED_SPEED, CHARACTER_RADIUS, CHARACTER_LENGTH, CHARACTER_ORIENTATION, TRAVERSAL_TYPE, CHARACTER_TYPE, CHARACTER_AVOIDANCE_MODE, CHARACTER_MAX_ACCEL, CHARACTER_MAX_DECEL, CHARACTER_DESIRED_TURN_SPEED, CHARACTER_MAX_TURN_RADIUS, CHARACTER_MAX_SPEED, CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES, CHARACTER_STAY_WITHIN_PARCEL), each followed with their associated value. 
+llCreateKeyValue key llCreateKeyValue(string k, string v Starts an asynchronous transaction to create a key-value pair associated with the given experience key using the given key and value. Returns a handle key for use in the dataserver callback. 
+llCreateLink(key target, integer parent)Attempt to link task script is attached to and target (requires permission PERMISSION_CHANGE_LINKS be set). If parent == TRUE, task script is attached to is the root
+llCSV2List(string src)[list] Create a list from a string of comma separated values
+llDamage  llDamage(key target, float damage, integer damage_type Delivers 'damage'  or type 'damage_type' to tasks and agent 'target' in the same region. 
+llDataSizeKeyValue key llDataSizeKeyValue( Starts an asynchronous transaction to request the used and total amount of data allocated for the experience. Returns a handle key for use in the dataserver callback. 
+llDeleteCharacter llDeleteCharacter( Convert the object back to a standard object, removing all pathfinding properties. 
+llDeleteKeyValue key llDeleteKeyValue(string k Starts an asynchronous transaction to delete a key-value pair associated with the given experience key with the given key. Returns a handle key for use in the dataserver callback. 
+llDeleteSubList(list src, integer start, integer end)[list] Remove the slice from the list and return the remainder
+llDeleteSubString(string src, integer start, integer end)[string] removes the indicated substring and returns the result
+llDetachFromAvatar()Drop off of avatar
+llDetectedDamage list llDetectedDamage(integer number Returns a list containing pending damage information (returns an empty list if number does not relate to a valid damage source or if called from a handler other than on_damage). 
+llDetectedGrab(integer number)[vector] returns the grab offset of the user touching object (returns <0,0,0> if number is not valid sensed object)
+llDetectedGroup(integer number)[integer] Returns TRUE if detected object is part of same group as owner
+llDetectedKey(integer number)[key] returns the key of detected object number (returns empty key if number is not valid sensed object)
+llDetectedLinkNumber(integer number)[integer] returns the link position of the triggered event for touches and collisions only
+llDetectedName(integer number)[string] returns the name of detected object number (returns empty string if number is not valid sensed object)
+llDetectedOwner(integer number)[key] returns the key of detected object's owner (returns empty key if number is not valid sensed object)
+llDetectedPos(integer number)[vector] returns the position of detected object number (returns <0,0,0> if number is not valid sensed object)
+llDetectedRezzer key llDetectedRezzer(integer number Returns a key that is the UUID of the object or avatar that rezzed the detected object 'number'. 
+llDetectedRot(integer number)[rotation] returns the rotation of detected object number (returns <0,0,0,1> if number is not valid sensed object)
+llDetectedTouchBinormal(integer number)[vector] returns the surface binormal for a triggered touch event
+llDetectedTouchFace(integer number)[integer] returns the index of the face on the object for a triggered touch event
+llDetectedTouchNormal(integer number)[vector] returns the surface normal for a triggered touch event
+llDetectedTouchPos(integer number)[vector] returns the position touched for a triggered touch event
+llDetectedTouchST(integer number)[vector] returns the s and t coordinates in the first two components of a vector, for a triggered touch event
+llDetectedTouchUV(integer number)[vector] returns the u and v coordinates in the first two components of a vector, for a triggered touch event
+llDetectedType(integer number)[integer] returns the type (AGENT, ACTIVE, PASSIVE, SCRIPTED) of detected object (returns 0 if number is not valid sensed object)
+llDetectedVel(integer number)[vector] returns the velocity of detected object number (returns <0,0,0> if number is not valid sensed object)
+llDialog(key avatar, string message, list buttons, integer chat_channel)Shows a dialog box on the avatar's screen with the message.\nUp to 12 strings in the list form buttons.\nIf a button is clicked, the name is chatted on chat_channel.
+llDie()deletes the object
+llDumpList2String(list src, string separator)[string] Write the list out in a single string using separator between values
+llEdgeOfWorld(vector pos, vector dir)[integer] Checks to see whether the border hit by dir from pos is the edge of the world (has no neighboring simulator)
+llEjectFromLand(key pest)Ejects pest from land that you own
+llEmail(string address, string subject, string message)Sends email to address with subject and message
+llEscapeURL(string url)[string] Returns and escaped/encoded version of url, replacing spaces with %20 etc.
+llEuler2Rot(vector v)[rotation] returns the rotation representation of Euler Angles v
+llEvade llEvade(key target, list options 'target' is the avatar or object UUID to evade. 'options' is currently not used. 
+llExecCharacterCmd llExecCharacterCmd(integer command, list options Currently known 'command's allow stopping the current pathfinding operation (CHARACTER_CMD_SMOOTH_STOP and CHARACTER_CMD_STOP) or causing the character to jump (CHARACTER_CMD_JUMP). The 'options' list is used to pass command parameters (currenly only used for CHARACTER_CMD_JUMP). 
+llFabs(float val)[float] 
+llFleeFrom llFleeFrom(vector position, float distance, list options Directs a character to keep a specific 'distance' (in meters) from a specific 'position' (in region coordinates) in the region or adjacent regions. 'options' is currently not used. 
+llFloor(float val)[integer] returns largest integer value <= val
+llForceMouselook(integer mouselook)If mouselook is TRUE any avatar that sits on this object is forced into mouselook mode
+llFrand(float mag)[float] returns random number in range [0,mag)
+llGenerateKey key llGenerateKey( Returns an unique generated UUID. 
+llGetAccel()[vector] gets the acceleration
+llGetAgentInfo(key id)[integer] Gets information about agent ID.\nReturns AGENT_FLYING, AGENT_ATTACHMENTS, AGENT_SCRIPTED, AGENT_SITTING, AGENT_ON_OBJECT, AGENT_MOUSELOOK, AGENT_AWAY, AGENT_BUSY, AGENT_TYPING, AGENT_CROUCHING, AGENT_ALWAYS_RUN, AGENT_WALKING and/or AGENT_IN_AIR.
+llGetAgentLanguage(key id)[string] Gets the agents preferred language..
+llGetAgentList list llGetAgentList(integer scope, list options Returns a list of avatar keys for all agents in the region limited to the area(s) specified by scope, or a list containing an error message string. scope can be AGENT_LIST_PARCEL, AGENT_LIST_PARCEL_OWNER or AGENT_LIST_REGION. options is currently unused. 
+llGetAgentSize(key id)[vector] If the agent is in the same sim as the object, returns the size of the avatar
+llGetAlpha(integer face)[float] gets the alpha
+llGetAndResetTime()[float] gets the time in seconds since creation and sets the time to zero
+llGetAnimatedObjectVisualParams list llGetAnimatedObjectVisualParams(list param_ids Takes a list of visual params Ids (integers) in list 'param_ids', and returns a corresponding list of values (floats) for the Animesh object containing the script calling this funtion. 
+llGetAnimation(key id)[string] Get the currently playing locomotion animation for avatar id
+llGetAnimationList(key id)[list] Gets a list of all playing animations for avatar id
+llGetAnimationOverride string llGetAnimationOverride(string anim_state Gets the name of the animation currently set for the given animation state. Requires either of the runtime permissions PERMISSION_OVERRIDE_ANIMATIONS or PERMISSION_TRIGGER_ANIMATION. 
+llGetAttached()[integer] returns the object attachment point or 0 if not attached
+llGetAttachedList list llGetAttachedList(key avatar Returns the list of public attachments (root prim UUID) worn by 'avatar'. By design HUD attachment keys are not reported by this function. 
+llGetBoundingBox(key object)[list] Returns the bounding box around an object (including any linked prims) relative to the root prim, in a list:  [ (vector) min_corner, (vector) max_corner ]
+llGetCameraAspect float llGetCameraAspect( Returns a float value for the current camera's aspect ratio (e.g. width/height) of the agent for which the task has PERMISSION_TRACK_CAMERA permission. 
+llGetCameraFOV float llGetCameraFOV( Returns a float value for the current camera's field of view (FOV), in radians, of the agent for which the task has PERMISSION_TRACK_CAMERA permission. 
+llGetCameraPos()[vector] Gets current camera position for agent task has permissions for.
+llGetCameraRot()[rotation] Gets current camera orientation for agent task has permissions for.
+llGetCenterOfMass()[vector] Get the object's center of mass
+llGetClosestNavPoint list llGetClosestNavPoint(vector point, list options Used to get a point on the navmesh that is the closest point to 'point'. Returns a list containing a single vector which is the closest point on the navmesh to the point provided or an empty list. 'point' is in region-local space. 'options' is a list of options (GCNP_RADIUS, GCNP_STATIC, CHARACTER_TYPE), each followed with their associated parameter. 
+llGetColor(integer face)[vector] gets the color
+llGetCreator()[key] Returns the creator of the object
+llGetDate()[string] Gets the date as YYYY-MM-DD
+llGetDayLength integer llGetDayLength( Returns the number of seconds in the day cycle applied to the current parcel. 
+llGetDayOffset integer llGetDayOffset( Returns the number of seconds added to the current time before calculating the current environmental time for the parcel. 
+llGetDisplayName string llGetDisplayName(key id Returns the name of an avatar, if the avatar is in the current simulator, otherwise the empty string. 
+llGetEnergy()[float] Returns how much energy is in the object as a percentage of maximum
+llGetEnv string llGetEnv(string name Returns a string with the requested data about the region. 
+llGetEnvironment list llGetEnvironment(vector pos, list params Returns a list containing the current environment values for the parcel and region as a list of attributes. Takes a list of attributes to retrieve in params and returns them in the order requested. 
+llGetExperienceDetails list llGetExperienceDetails(key experience_id Returns a list of details about the experience. This list has 5 components: string experience_name, key owner_id, key group_id, key experience_id, string state, string state_message. 
+llGetExperienceErrorMessage string llGetExperienceErrorMessage(integer error Returns a text description of a particular Experience LSL error constant. 
+llGetExperienceList list llGetExperienceList(key agent Returns the list of experience IDs the agent has accepted. Returns NULL_KEY if called from an object that is not an attachment owned by the agent. 
+llGetForce()[vector] gets the force (if the script is physical)
+llGetFreeMemory()[integer] returns the available heap space for the current script
+llGetFreeURLs()[integer] returns the available urls for the current script
+llGetGeometricCenter()[vector] Returns the geometric center of the linked set the script is attached to.
+llGetGMTclock()[float] Gets the time in seconds since midnight in GMT
+llGetHealth float llGetHealth(key id Returns the current health of an avatar or object in the region. 
+llGetHTTPHeader(key id, string header)[string] Get the value for header for request id.
+llGetInventoryAcquireTime string llGetInventoryAcquireTime(string item Returns a string with the timestamp that the item was added to the prim's inventory. 
+llGetInventoryCreator(string item)[key] Returns the key for the creator of the inventory item.
+llGetInventoryDesc key llGetInventoryDesc(string item Returns a string with the description of the inventory item. 
+llGetInventoryKey(string name)[key] Returns the key of the inventory name
+llGetInventoryName(integer type, integer number)[string] Get the name of the inventory item number of type
+llGetInventoryNumber(integer type)[integer] Get the number of items of a given type in the task's inventory.\nValid types: INVENTORY_TEXTURE, INVENTORY_SOUND, INVENTORY_OBJECT, INVENTORY_SCRIPT, INVENTORY_CLOTHING, INVENTORY_BODYPART, INVENTORY_NOTECARD, INVENTORY_LANDMARK, INVENTORY_ALL
+llGetInventoryPermMask(string item, integer mask)[integer] Returns the requested permission mask for the inventory item.
+llGetInventoryType(string name)[integer] Returns the type of the inventory name
+llGetKey()[key] Get the key for the task the script is attached to
+llGetLandOwnerAt(vector pos)[key] Returns the key of the land owner, NULL_KEY if public
+llGetLinkKey(integer linknum)[key] Get the key of linknumber in link set
+llGetLinkMedia list llGetLinkMedia(integer link, integer face, list params Get the media params for a particular face on a 'link'ed prim(s), given the desired list of named params. Returns a list of values in the order requested (empty list if no media exists on the face). Takes the same parameters as llGetPrimMediaParams(). 
+llGetLinkName(integer linknum)[string] Get the name of linknumber in link set
+llGetLinkNumber()[integer] Returns what number in a link set the script is attached to (0 means no link, 1 the root, 2 for first child, etc)
+llGetLinkNumberOfSides integer llGetLinkNumberOfSides(integer link Similar to llGetNumberOfSides() but applies to any prim in the link set. 
+llGetLinkSitFlags sleep_time 0.2 integer llGetLinkSitFlags(integer link Returns the current sit flags (ORed SIT_FLAG_SIT_TARGET, SIT_FLAG_ALLOW_UNSIT, SIT_FLAG_SCRIPTED_ONLY, SIT_FLAG_NO_COLLIDE) for the sit target in the 'link'. 
+llGetListEntryType(list src, integer index)[integer] Returns the type of the index entry in the list\n(TYPE_INTEGER, TYPE_FLOAT, TYPE_STRING, TYPE_KEY, TYPE_VECTOR, TYPE_ROTATION, or TYPE_INVALID if index is off list)
+llGetListLength(list src)[integer] Get the number of elements in the list
+llGetLocalPos()[vector] gets the position relative to the root (if the script isn't physical)
+llGetLocalRot()[rotation] gets the rotation local to the root (if the script isn't physical)
+llGetMass()[float] Get the mass of task name that script is attached to
+llGetMassMKS float llGetMassMKS( Returns a float that is the mass in kilograms of the object the script is attached to. 
+llGetMaxScaleFactor float llGetMaxScaleFactor( Returns the maximum multiplicative scale factor which can be used by llScaleByFactor(). 
+llGetMemoryLimit integer llGetMemoryLimit( Get the maximum memory a script can use. Returns the integer amount of memory the script can use in bytes. 
+llGetMinScaleFactor float llGetMinScaleFactor( Returns the minimum multiplicative scale factor which can be used by llScaleByFactor(). 
+llGetMoonDirection vector llGetMoonDirection( Returns a normalized vector to the current moon position at the location of object containing the script. 
+llGetMoonRotation rotation llGetMoonRotation( Returns the rotation applied to the moon for the parcel at the location of the object containing the script. 
+llGetNextEmail(string address, string subject)Get the next waiting email with appropriate address and/or subject (if blank they are ignored)
+llGetNotecardLine(string name, integer line)[key] Returns line line of notecard name via the dataserver event
+llGetNotecardLineSync string llGetNotecardLineSync(string name, integer line Requests the line line of the notecard name from the dataserver. 
+llGetNumberOfNotecardLines(string name)[key] Returns number of lines in notecard 'name' via the dataserver event (cast return value to integer)
+llGetNumberOfPrims()[integer] Returns the number of prims in a link set the script is attached to
+llGetNumberOfSides()[integer] Returns the number of sides
+llGetObjectAnimationNames list llGetObjectAnimationNames( Returns a list of names of animations playing in the current object. 
+llGetObjectDesc()[string] Returns the description of the object the script is attached to
+llGetObjectDetails(key id, list params)[list] Gets the object details specified in params for the object with key id.\nDetails are OBJECT_NAME, _DESC, _POS, _ROT, _VELOCITY, _OWNER, _GROUP, _CREATOR.
+llGetObjectLinkKey key llGetObjectLinkKey(key object_id, integer link Returns the key of the linked prim link in the linkset identified by object_id. 
+llGetObjectMass(key id)[float] Get the mass of the object with key id
+llGetObjectName()[string] Returns the name of the object script is attached to
+llGetObjectPermMask(integer mask)[integer] Returns the requested permission mask for the root object the task is attached to.
+llGetObjectPrimCount(key object_id)[integer] Returns the total number of prims for an object.
+llGetOmega()[vector] gets the omega
+llGetOwner()[key] Returns the owner of the task
+llGetOwnerKey(key id)[key] Find the owner of id
+llGetParcelDetails(vector pos, list params)[list] Gets the parcel details specified in params for the parcel at pos.\nParams is one or more of: PARCEL_DETAILS_NAME, _DESC, _OWNER, _GROUP, _AREA
+llGetParcelFlags(vector pos)[integer] Get the parcel flags (PARCEL_FLAG_*) for the parcel including the point pos.
+llGetParcelMaxPrims(vector pos, integer sim_wide)[integer] Gets the maximum number of prims allowed on the parcel at pos.
+llGetParcelMusicURL string llGetParcelMusicURL( Gets the streaming audio URL for the parcel which the object is on. 
+llGetParcelPrimCount(vector pos, integer category, integer sim_wide)[integer] Gets the number of prims on the parcel of the given category.\nCategories: PARCEL_COUNT_TOTAL, _OWNER, _GROUP, _OTHER, _SELECTED, _TEMP.
+llGetParcelPrimOwners(vector pos)[list] Returns a list of all residents who own objects on the parcel and the number of objects they own.\nRequires owner-like permissions for the parcel.
+llGetPermissions()[integer] return what permissions have been enabled
+llGetPermissionsKey()[key] Return agent that permissions are enabled for.  NULL_KEY if not enabled
+llGetPhysicsMaterial list llGetPhysicsMaterial( Returns a list of the object physics properties: [ float gravity_multiplier, float restitution, float friction, float density ].  
+llGetPos()[vector] gets the position (if the script isn't physical)
+llGetPrimitiveParams(list params)[list] Gets primitive parameters specified in the params list.
+llGetPrimMediaParams sleep_time 1 list llGetPrimMediaParams(integer face, list params Returns the media params for a particular face on an object, given the desired list of names, in the order requested. Returns an empty list if no media exists on the face. 
+llGetRegionAgentCount()[integer] returns the number of agents in a region
+llGetRegionCorner()[vector] Returns a vector with the south west corner x,y position of the region the object is in
+llGetRegionDayLength integer llGetRegionDayLength( Returns the number of seconds in the day cycle applied to the current region. 
+llGetRegionDayOffset integer llGetRegionDayOffset( Returns the number of seconds added to the current time before calculating the current environmental time for the region. 
+llGetRegionFlags()[integer] Get the region flags (REGION_FLAG_*) for the region the object is in.
+llGetRegionFPS()[float] returns the mean region frames per second
+llGetRegionMoonDirection vector llGetRegionMoonDirection( Returns a normalized vector to the current moon position at the location of object containing the script. 
+llGetRegionMoonRotation rotation llGetRegionMoonDirection( Returns the rotation applied to the moon for the region at the location of the object containing the script. 
+llGetRegionName()[string] returns the current region name
+llGetRegionSunDirection vector llGetRegionSunDirection( Returns a normalized vector to the current sun position at the location of object containing the script. 
+llGetRegionSunRotation rotation llGetRegionSunRotation( Returns the rotation applied to the sun for the region at the location of the object containing the script. 
+llGetRegionTimeDilation()[float] returns the current time dilation as a float between 0 and 1
+llGetRenderMaterial string llGetRenderMaterial(integer face Returns a string that is the Material on face. If the Material is in the prim's inventory, the return value is the inventory name, otherwise the returned value is the Material UUID. 
+llGetRootPosition()[vector] Gets the global position of the root object of the object script is attached to
+llGetRootRotation()[rotation] Gets the global rotation of the root object of the object script is attached to
+llGetRot()[rotation] gets the rotation (if the script isn't physical)
+llGetScale()[vector] gets the scale
+llGetScriptName()[string] Returns the script name
+llGetScriptState(string name)[integer] Resets TRUE if script name is running
+llGetSimStats float llGetSimStats(integer stat_type Returns the simulator statistics corresponding to the stat_type (currently only SIM_STAT_PCT_CHARS_STEPPED). 
+llGetSimulatorHostname()[string] Gets the hostname of the machine script is running on (same as string in viewer Help dialog)
+llGetSPMaxMemory integer llGetSPMaxMemory( Returns the integer of the most bytes used while llScriptProfiler() was last active. Only relevant for Mono-compiled scripts. 
+llGetStartParameter()[integer] Get's the start paramter passed to llRezObject
+llGetStartString string llGetStartString( Returns a string that was passed to the object on rez with llRezObjectWithParams(). 
+llGetStaticPath list llGetStaticPath(vector start, vector end, float radius, list params Returns a list of position vectors indicating pathfinding waypoints between positions at start and end, for a character of a given radius. The waypoints this function returns are for the 'static' nav mesh, meaning that dynamic objects are ignored. 
+llGetStatus(integer status)[integer] gets value of status (STATUS_PHYSICS, STATUS_PHANTOM, STATUS_BLOCK_GRAB,\nSTATUS_ROTATE_X, STATUS_ROTATE_Y, and/or STATUS_ROTATE_Z)
+llGetSubString(string src, integer start, integer end)[string] returns the indicated substring
+llGetSunDirection()[vector] Returns the sun direction on the simulator
+llGetSunRotation rotation llGetSunRotation( Returns the rotation applied to the sun for the parcel at the location of the object containing the script. 
+llGetTexture(integer face)[string] gets the texture of face (if it's a texture in the object inventory, otherwise the key in a string)
+llGetTextureOffset(integer side)[vector] Returns the texture offset of side in the x and y components of a vector
+llGetTextureRot(integer side)[float] Returns the texture rotation of side
+llGetTextureScale(integer side)[vector] Returns the texture scale of side in the x and y components of a vector
+llGetTime()[float] gets the time in seconds since creation
+llGetTimeOfDay()[float] gets the time in seconds since Second Life server midnight (or since server up-time; whichever is smaller)
+llGetTimestamp()[string] Gets the timestamp in the format: YYYY-MM-DDThh:mm:ss.ff..fZ
+llGetTorque()[vector] gets the torque (if the script is physical)
+llGetUnixTime()[integer] Get the number of seconds elapsed since 00:00 hours, Jan 1, 1970 UTC from the system clock.
+llGetUsedMemory integer llGetUsedMemory( Returns the integer of the number of bytes of memory currently in use by the script. Only relevant for Mono-compiled scripts. 
+llGetUsername string llGetUsername(key id Returns the single-word username of an avatar, if the avatar is in the current region, otherwise the empty string. 
+llGetVel()[vector] gets the velocity
+llGetVisualParams list llGetVisualParams(key agent_id, list params Returns a list of the details for agent_id, requested in params. 
+llGetWallclock()[float] gets the time in seconds since midnight
+llGiveInventory(key destination, string inventory)Give inventory to destination
+llGiveInventoryList(key destination, string category, list inventory)Give inventory to destination in a new category
+llGiveMoney(key destination, integer amount)[integer] transfer amount of money from script owner to destination
+llGodLikeRezObject(key inventory, vector pos)rez directly off of a UUID if owner has dog-bit set
+llGround(vector v)[float] returns the ground height below the object position + v
+llGroundContour(vector v)[vector] returns the ground contour below the object position + v
+llGroundNormal(vector v)[vector] returns the ground normal below the object position + v
+llGroundRepel(float height, integer water, float tau)Critically damps to height if within height*0.5 of level (either above ground level or above the higher of land and water if water == TRUE)
+llGroundSlope(vector v)[vector] returns the ground slope below the object position + v
+llHash integer llHash(string val Returns a 32 bits hash for the provided string. Returns 0 if the input string is empty. 
+llHMAC llHMAC(string private_key, string msg, string algorithm Returns a string that is the Base64-encoded hash of 'msg' when using hash 'algorithm' and secret key 'private_key'. This function supports md5, sha1, sha224, sha256, sha384, sha512 for 'algorithm'. 
+llHTTPRequest(string url, list parameters, string body)[key] Send an HTTP request.
+llHTTPResponse(key id, integer status, string body)Responds to request id with status and body.
+llInsertString(string dst, integer position, string src)[string] inserts src into dst at position and returns the result
+llInstantMessage(key user, string message)IMs message to the user
+llIntegerToBase64(integer number)[string] Big endian encode of of integer as a Base64 string.
+llIsFriend integer llIsFriend(key agent_id Returns TRUE if agent_id and the owner of the prim the script is in are friends, otherwise FALSE. 
+llJson2List list llJson2List(string json Converts a JSON compound value (either an array or an object) to an LSL List. 'json' is a string containing a valid JSON array or object value. If the string in 'json' is not a valid JSON object or array, a list with a single item matching the conversion above is returned. 
+llJsonGetValue string llJsonGetValue(string json, list specifiers Directly extracts a JSON value to a string. Returns the extracted JSON string. 'json' is a string containing a valid JSON array or object value. 'specifiers' is a list of specifiers. 
+llJsonSetValue string llJsonSetValue(string json, list specifiers, string value Directly sets a JSON value within a string. Returns the newly modified JSON string. 'json' is a string containing a valid JSON array or object value. 'specifiers' is a list of specifiers. 'value' is the value to be inserted into the specified place in JSON. 
+llJsonValueType string llJsonValueType(string json, list specifiers Determines the type of a JSON value. 'json' is a string containing a valid JSON array or object value. 'specifiers' is a list of specifiers. Returns a special string constant among: JSON_INVALID, JSON_OBJECT, JSON_ARRAY, JSON_NUMBER, JSON_STRING, JSON_TRUE, JSON_FALSE and JSON_NULL. 
+llKey2Name(key id)[string] Returns the name of the object key, iff the object is in the current simulator, otherwise the empty string
+llKeyCountKeyValue key llKeyCountKeyValue( Starts an asynchronous transaction to request the number of experience keys in the system. Returns a handle key for use in the dataserver callback. 
+llKeysKeyValue key llKeysKeyValue(integer first, integer count Starts an asynchronous transaction to request a number of experience keys. Returns a handle key for use in the dataserver callback. 
+llLinkAdjustSoundVolume llLinkAdjustSoundVolume(integer link, float volume Adjusts volume of attached sound (0.0 - 1.0) for prim number 'link' in the linkset. 
+llLinkParticleSystem llLinkParticleSystem(integer link, list params Similar to llParticleSystem() but applies to any prim in the link set. 
+llLinkPlaySound llLinkPlaySound(integer link,string sound, float volume, integer flags Plays attached sound for prim number 'link' in the linkset, at 'volume' (0.0 to 1.0), and with 'flags' to control how the sound is played (SOUND_PLAY, SOUND_LOOP, SOUND_TRIGGER, SOUND_SYNC). 
+llLinksetDataAvailable integer llLinksetDataAvailable( Returns the number of bytes available in the linkset's datastore. 
+llLinksetDataCountKeys integer llLinksetDataCountKeys( Returns an integer total number of keys in use in the linkset's datastore. 
+llLinksetDataDelete integer llLinksetDataDelete(string name Removes a key/value pair from the linkset's datastore. Returns 0 on success or an error code. 
+llLinksetDataDeleteProtected integer llLinksetDataDeleteProtected(string name, string password Removes a 'password' protected key/value pair from the linkset's datastore. Returns 0 on success or an error code. 
+llLinksetDataFindKeys list llLinksetDataFindKeys(integer first, integer count Return a list of keys currently in use in the linkset data from index 'first' (zero based) key with a maximum of 'count' keys in the returned list. 
+llLinksetDataListKeys list llLinksetDataListKeys(string regex, integer first, integer count Return a list of keys in the linkset data which match the 'regex' expression passed to the function, from index 'first' (zero based) key with a maximum of 'count' keys in the returned list. 
+llLinksetDataRead string llLinksetDataWrite(string name Reads the value associated with a key from the linkset's key-value datastore. Returns a string The string associated with the key. If the 'name' key does not exist an empty string is returned. 
+llLinksetDataReadProtected string llLinksetDataReadProtected(string name, string password Reads the 'password' protected value associated with a key from the linkset's key-value datastore. Returns a string The string associated with the key. If the 'name' key does not exist or the 'password' does not match, an empty string is returned. 
+llLinksetDataReset llLinksetDataReset( Erases all existing keys value pairs in the linkset's datastore. 
+llLinksetDataWrite integer llLinksetDataWrite(string name, string value Creates or updates a key/value pair in the linksets datastore. Returns an integer Indicates success or failure. 0 is success, a positive number indicates failure. 
+llLinksetDataWriteProtected integer llLinksetDataWriteProtected(string name, string value, string password Creates or updates a 'password' protected key/value pair in the linksets datastore. Returns an integer Indicates success or failure. 0 is success, a positive number indicates failure. 
+llLinkSetSoundQueueing llSetSoundQueueing(integer link, integer queue Sets whether sounds attached to prim number 'link' in the linkset wait for the current sound to finish (If queue == TRUE then queuing is enabled, if FALSE queuing is disabled [default]). 
+llLinkSetSoundRadius llLinkStopSound(integer link Establishes a hard cut-off radius for audibility of sounds (both attached and triggered sounds) played via prim number 'link' in the linkset. 
+llLinkSitTarget llLinkSitTarget(integer link, vector offset, rotation rot Set the sit location for the 'link'ed prim(s). The sit location is relative to the prim's position and rotation. Equivalent to calling llSitTarget on link prim(s) in the link set. 
+llLinkStopSound llLinkStopSound(integer link Stops the sound played and attached to prim number 'link' in the linkset. 
+llList2CSV(list src)[string] Create a string of comma separated values from list
+llList2Float(list src, integer index)[float] Copy the float at index in the list
+llList2Integer(list src, integer index)[integer] Copy the integer at index in the list
+llList2Json string llList2Json(string type, list values Converts a list to JSON. 'type' must be either JSON_ARRAY or JSON_OBJECT. 'specifiers' is a list of specifiers. 'values' is the list to be converted to JSON. Returns JSON_INVALID if any other string or json type is specified as the type. 
+llList2Key(list src, integer index)[key] Copy the key at index in the list
+llList2List(list src, integer start, integer end)[list] Copy the slice of the list from start to end
+llList2ListSlice list llList2ListSlice(list src, integer start, integer end, integer stride, integer slice_idx Returns a list of elements at index 'slice_idx' of every stride in strided list 'src' whose index is a multiple of 'stride' in the range 'start' to 'end'. 
+llList2ListStrided(list src, integer start, integer end, integer stride)[list] Copy the strided slice of the list from start to end
+llList2Rot(list src, integer index)[rotation] Copy the rotation at index in the list
+llList2String(list src, integer index)[string] Copy the string at index in the list
+llList2Vector(list src, integer index)[vector] Copy the vector at index in the list
+llListen(integer channel, string name, key id, string msg)[integer] sets a callback for msg on channel from name and id (name, id, and/or msg can be empty) and returns an identifier that can be used to deactivate or remove the listen
+llListenControl(integer number, integer active)makes a listen event callback active or inactive
+llListenRemove(integer number)removes listen event callback number
+llListFindList(list src, list test)[integer] Returns the start of the first instance of test in src, -1 if not found
+llListFindListNext integer llListFindListNext(list src, list test, integer instance Returns the integer index of the nth 'instance' of 'test' in 'src'. Returns -1 if not found. 
+llListFindStrided integer llListFindStrided(list src, list test, integer start, integer end, integer stride Returns the index of the first instance of 'test' in 'src' from range 'start,' to 'end,' with src 'stride'. Returns -1 if not found. 
+llListInsertList(list dest, list src, integer start)[list] Inserts src into dest at position start
+llListRandomize(list src, integer stride)[list] Returns a randomized list of blocks of size stride
+llListReplaceList(list dest, list src, integer start, integer end)[list] Replaces start through end of dest with src.
+llListSort(list src, integer stride, integer ascending)[list] Sort the list into blocks of stride in ascending order if ascending == TRUE.  Note that sort only works between same types.
+llListSortStrided list llListSortStrided(list src, integer stride, integer keyindex, integer ascending Returns a list that is 'src' sorted by the entry 'keyindex' in each 'stride', in ascending order if 'ascending' == TRUE. The sort order is affected by type. 
+llListStatistics(integer operation, list l)[float] Perform statistical aggregate functions on list l using LIST_STAT_* operations.
+llLoadURL(key avatar_id, string message, string url)Shows dialog to avatar avatar_id offering to load web page at URL.  If user clicks yes, launches their web browser.
+llLog(float val)[float] Returns the base e log of val if val > 0, otherwise returns 0.
+llLog10(float val)[float] Returns the base 10 log of val if val > 0, otherwise returns 0.
+llLookAt(vector target, float strength, float damping)Cause object name to point it's forward axis towards target
+llLoopSound(string sound, float volume)plays attached sound looping indefinitely at volume (0.0 - 1.0)
+llLoopSoundMaster(string sound, float volume)plays attached sound looping at volume (0.0 - 1.0), declares it a sync master
+llLoopSoundSlave(string sound, float volume)plays attached sound looping at volume (0.0 - 1.0), synced to most audible sync master
+llMakeExplosion(integer particles, float scale, float vel, float lifetime, float arc, string texture, vector offset)Make a round explosion of particles
+llMakeFire(integer particles, float scale, float vel, float lifetime, float arc, string texture, vector offset)Make fire like particles
+llMakeFountain(integer particles, float scale, float vel, float lifetime, float arc, integer bounce, string texture, vector offset, float bounce_offset)Make a fountain of particles
+llMakeSmoke(integer particles, float scale, float vel, float lifetime, float arc, string texture, vector offset)Make smoke like particles
+llManageEstateAccess integer llManageEstateAccess(integer action, key id To add or remove agents from the estate's agent access or ban lists or groups from the estate's group access list. Only works for objects owned by the Estate Owner or an Estate Manager. Returns TRUE if successful and FALSE if throttled, on invalid action, on invalid or null id, or if object owner is not allowed to manage the estate. 'action' can be any of: ESTATE_ACCESS_ALLOWED_[AGENT/GROUP]_[ADD/REMOVE] or ESTATE_ACCESS_BANNED_AGENT_[ADD/REMOVE]. 
+llMapDestination(string simname, vector pos, vector look_at)Opens world map centered on region with pos highlighted.\nOnly works for scripts attached to avatar, or during touch events.\n(NOTE: look_at currently does nothing)
+llMD5String(string src, integer nonce)[string] Performs a RSA Data Security, Inc. MD5 Message-Digest Algorithm on string with nonce.  Returns a 32 character hex string.
+llMessageLinked(integer linknum, integer num, string str, key id)Sends num, str, and id to members of the link set (LINK_ROOT sends to root task in a linked set,\nLINK_SET sends to all tasks,\nLINK_ALL_OTHERS to all other tasks,\nLINK_ALL_CHILDREN to all children,\nLINK_THIS to the task the script it is in)
+llMinEventDelay(float delay)Set the minimum time between events being handled
+llModifyLand(integer action, integer size)Modify land with action (LAND_LEVEL, LAND_RAISE, LAND_LOWER, LAND_SMOOTH, LAND_NOISE, LAND_REVERT)\non size (LAND_SMALL_BRUSH, LAND_MEDIUM_BRUSH, LAND_LARGE_BRUSH)
+llModPow(integer a, integer b, integer c)[integer] Returns a raised to the b power, mod c. ( (a**b)%c ).  b is capped at 0xFFFF (16 bits).
+llMoveToTarget(vector target, float tau)critically damp to target in tau seconds (if the script is physical)
+llName2Key key llName2Key(string name Returns the Agent ID key for the named agent in the region or NULL_KEY if no matching agent is in the region. Legacy names (with or without "Resident" for new residents) or user names may be passed to this function, case insensitive. 
+llNavigateTo llNavigateTo(vector pos, list options Directs an object to travel to a defined position in the region or adjacent regions. 'pos' is the position in region coordinates for the character to navigate to. 'options' is a list of options (FORCE_DIRECT_PATH only for now), each followed with their associated parameter. 
+llOffsetTexture(float offsets, float offsett, integer face)sets the texture s, t offsets for the chosen face
+llOpenFloater llOpenFloater(string title, string url, list params Sends a request to the viewer to open a new floater with the provided title. This function must be called from a script running within an attachment and be compiled as part of a PRIVILEGED experience. If the request was successfully sent to the viewer this function will return 0, and NOT_EXPERIENCE, NOT_ATTACHMENT, BAD_AGENT or NOT_EXPERIENCE_PERMISSIONS on failure. 
+llOpenRemoteDataChannel()Creates a channel to listen for XML-RPC calls.  Will trigger a remote_data event with channel id once it is available.
+llOrd integer llOrd(string val, integer index Calculates the ordinal value for a character in a string. The returned value is the UTF-32 value of the character at the specified index. If index is outside the bounds of the string, this function returns 0. 
+llOverMyLand(key id)[integer] Returns TRUE if id is over land owner of object owns, FALSE otherwise
+llOwnerSay(string msg)says msg to owner only (if owner in sim)
+llParcelMediaCommandList(list command)Sends a list of commands, some with arguments, to a parcel.
+llParcelMediaQuery(list query)[list] Sends a list of queries, returns a list of results.
+llParseString2List(string src, list separators, list spacers)[list] Breaks src into a list, discarding separators, keeping spacers (separators and spacers must be lists of strings, maximum of 8 each)
+llParseStringKeepNulls(string src, list separators, list spacers)[list] Breaks src into a list, discarding separators, keeping spacers (separators and spacers must be lists of strings, maximum of 8 each), keeping any null values generated.
+llParticleSystem(list rules)Creates a particle system based on rules.  Empty list removes particle system from object.\nList format is [ rule1, data1, rule2, data2 . . . rulen, datan ]
+llPassCollisions(integer pass)if pass == TRUE, collisions are passed from children on to parents (default is FALSE)
+llPassTouches(integer pass)if pass == TRUE, touches are passed from children on to parents (default is FALSE)
+llPatrolPoints llPatrolPoints(list points, list options Sets the object patrolling between the points specified in points. 'points' is a list of vectors for the character to travel through sequentially. The list must contain at least two entries. 'options' is a list of options (PATROL_PAUSE_AT_WAYPOINTS only for now), each followed with their associated parameter. 
+llPlaySound(string sound, float volume)plays attached sound once at volume (0.0 - 1.0)
+llPlaySoundSlave(string sound, float volume)plays attached sound once at volume (0.0 - 1.0), synced to next loop of most audible sync master
+llPointAt(vector pos)Make agent that owns object point at pos
+llPow(float base, float exponent)[float] returns 0 and triggers Math Error for imaginary results
+llPreloadSound(string sound)preloads a sound on viewers within range
+llPursue llPursue(key target, list options 'target' is the avatar or object UUID to pursue 'options' is a list of options (PURSUIT_OFFSET, REQUIRE_LINE_OF_SIGHT, PURSUIT_FUZZ_FACTOR, PURSUIT_INTERCEPT, PURSUIT_GOAL_TOLERANCE), each followed with their associated value. 
+llPushObject(key id, vector impulse, vector ang_impulse, integer local)Applies impulse and ang_impulse to object id
+llReadKeyValue key llReadKeyValue(string k Starts an asynchronous transaction to read the value associated with the specified key and the specified experience. Returns a handle key for use in the dataserver callback. 
+llRefreshPrimURL()Reloads the web page shown on the sides of the object.
+llRegionSay(integer channel, string msg)broadcasts msg to entire region on channel (not 0.)
+llRegionSayTo llRegionSayTo(key target, integer channel, string message Sends message on channel (not DEBUG_CHANNEL) directly to prim or avatar target anywhere within the region. 
+llReleaseCamera(key avatar)Return camera to agent
+llReleaseControls()Stop taking inputs
+llReleaseURL(string url)Releases the specified URL, it will no longer be usable.
+llRemoteDataReply(key channel, key message_id, string sdata, integer idata)Send an XML-RPC reply to message_id on channel with payload of string sdata and integer idata
+llRemoteDataSetRegion()If an object using remote data channels changes regions, you must call this function to reregister the remote data channels.\nYou do not need to make this call if you don't change regions.
+llRemoteLoadScript sleep_time 3 DEPRECATED!  Please use llRemoteLoadScriptPin instead. 
+llRemoteLoadScriptPin(key target, string name, integer pin, integer running, integer start_param)If the owner of the object this script is attached can modify target,\nthey are in the same region,\nand the matching pin is used,\ncopy script name onto target,\nif running == TRUE, start the script with param.
+llRemoveFromLandBanList(key avatar)Remove avatar from the land ban list
+llRemoveFromLandPassList(key avatar)Remove avatar from the land pass list
+llRemoveInventory(string inventory)Remove the named inventory item
+llRemoveVehicleFlags(integer flags)removes the enabled bits in 'flags'
+llReplaceAgentEnvironment integer llReplaceAgentEnvironment(key agent_id, float transition, string environment Overrides the current region and parcel environment seen by an agent. This function must be executed as part of an experience. 'agent_id' is the key of an agent in the region and participating in the experience. 'transition' is the number of seconds over which to transition to the new settings. 'environment' is the name of an environmental setting in the object's inventory or the asset Id for an environment. 
+llReplaceEnvironment integer llReplaceEnvironment(vector position, string environment, integer track_no, integer day_length, integer day_offset Overrides the current region and parcel environment seen by an agent. This function must be executed as part of an experience. 'position' is the position in the region of the parcel that will receive the new environment. To change the entire region use <-1, -1, -1>. 'environment' is the name of an environmental setting in the object's inventory or the asset ID for an environment. NULL_KEY or empty string to remove the environment. 'track_no' is the elevation zone to change. 0 for water, 1 for ground level. -1 to change all tracks. 'day_length' is the length in seconds for the day cycle. -1 to leave unchanged. 'day_offset' is the offset in seconds from UTC. -1 to leave unchanged. 
+llReplaceSubString string llReplaceSubString(string src, string pattern, string replacement_pattern, integer count Returns a string that is the result of replacing the first 'count' matching instances 'pattern' in 'src' with 'replacement_pattern'. If count is 0, all matching substrings are replaced. If count is positive, substrings are replaced starting from the left/beginning of src. If count is negative, substrings are replaced starting from the right/end of src. 
+llRequestAgentData(key id, integer data)[key] Requests data about agent id.  When data is available the dataserver event will be raised
+llRequestDisplayName key llRequestDisplayName(key id Requests name of an avatar. Returns a handle (a key) that can be used to identify the request when the dataserver event is raised. 
+llRequestExperiencePermissions llRequestExperiencePermissions(key agent, string name Asks the agent for permission to participate in an experience. NOTE: the name parameter is deprecated and its contents ignored. 
+llRequestInventoryData(string name)[key] Requests data from object's inventory object.  When data is available the dataserver event will be raised
+llRequestPermissions(key agent, integer perm)ask agent to allow the script to do perm (NB: Debit, ownership, link, joint, and permission requests can only go to the task's owner)
+llRequestSecureURL()[key] Requests one HTTPS:// (SSL) url for use by this object\nTriggers an http_server event with results.
+llRequestSimulatorData(string simulator, integer data)[key] Requests data about simulator.  When data is available the dataserver event will be raised
+llRequestURL()[key] Requests one HTTP:// url for use by this object\nTriggers an http_server event with results.
+llRequestUserKey key llRequestUserKey(string name Requests the Agent ID key for the named agent from the data server. Legacy names (with or without "Resident" for new residents) or user names may be passed to this function, case insensitive. Returns a handle (a key) that can be used to identify the request when the dataserver event is raised. 
+llRequestUsername key llRequestUsername(key id Requests single-word username of an avatar. Returns a handle (a key) that can be used to identify the request when the dataserver event is raised. 
+llResetAnimationOverride llResetAnimationOverride(string anim_state Resets the animation for the given animation state to the default. Requires the runtime permission PERMISSION_OVERRIDE_ANIMATIONS. 
+llResetLandBanList()Removes all residents from the land ban list.
+llResetLandPassList()Removes all residents from the land access/pass list.
+llResetOtherScript(string name)Resets script name
+llResetScript()Resets the script
+llResetTime()sets the time to zero
+llReturnObjectsByID integer llReturnObjectsByID(list objects Requires the runtime permission PERMISSION_RETURN_OBJECTS. Objects which IDs are listed in 'objects' are returned to their owner. Returns the number of objects that were returned to their owners or an error code (ERR_GENERIC, ERR_PARCEL_PERMISSIONS, ERR_MALFORMED_PARAMS, ERR_RUNTIME_PERMISSIONS or ERR_THROTTLED). 
+llReturnObjectsByOwner integer llReturnObjectsByOwner(key owner, integer scope Requires the runtime permission PERMISSION_RETURN_OBJECTS. Objects pertaining to 'owner' in the particular 'scope' (OBJECT_RETURN_PARCEL, OBJECT_RETURN_PARCEL_OWNER, OBJECT_RETURN_REGION) are returned. Returns the number of objects that were returned to their owners or an error code (ERR_GENERIC, ERR_PARCEL_PERMISSIONS, ERR_MALFORMED_PARAMS, ERR_RUNTIME_PERMISSIONS or ERR_THROTTLED). 
+llRezAtRoot(string inventory, vector pos, vector vel, rotation rot, integer param)Instantiate owner's inventory object at pos with velocity vel and rotation rot with start parameter param.\nThe last selected root object's location will be set to pos
+llRezObject(string inventory, vector pos, vector vel, rotation rot, integer param)Instanciate owners inventory object at pos with velocity vel and rotation rot with start parameter param
+llRezObjectWithParams key llRezObjectWithParams(string inventory, list params Instantiates 'inventory' object with an initial set of parameters specified in 'params'. 
+llRot2Angle(rotation rot)[float] Returns the rotation angle represented by rot
+llRot2Axis(rotation rot)[vector] Returns the rotation axis represented by rot
+llRot2Euler(rotation q)[vector] returns the Euler representation (roll, pitch, yaw) of q
+llRot2Fwd(rotation q)[vector] returns the forward vector defined by q
+llRot2Left(rotation q)[vector] returns the left vector defined by q
+llRot2Up(rotation q)[vector] returns the up vector defined by q
+llRotateTexture(float rotation, integer face)sets the texture rotation for the chosen face
+llRotBetween(vector v1, vector v2)[rotation] returns the rotation to rotate v1 to v2
+llRotLookAt(rotation target, float strength, float damping)Cause object name to point it's forward axis towards target
+llRotTarget(rotation rot, float error)[integer] set rotations with error of rot as a rotational target and return an ID for the rotational target
+llRotTargetRemove(integer number)removes rotational target number
+llRound(float val)[integer] returns val rounded to the nearest integer
+llSameGroup(key id)[integer] Returns TRUE if ID is in the same sim and has the same active group, otherwise FALSE
+llSay(integer channel, string msg)says msg on channel
+llScaleByFactor integer llScaleByFactor(float scaling_factor Uniformly resizes the linkset by the given multiplicative scale factor (e.g. 2.0 to double the scale in all dimensions Returns TRUE if rescaling was successful or FALSE otherwise. This function only succeeds in non-physical objects and rescaling is subject to linkability rules and prim scale limits. 
+llScaleTexture(float scales, float scalet, integer face)sets the texture s, t scales for the chosen face
+llScriptDanger(vector pos)[integer] Returns true if pos is over public land, sandbox land, land that doesn't allow everyone to edit and build, or land that doesn't allow outside scripts
+llScriptProfiler llScriptProfiler(integer flags Enables or disables the scripts profiling state. Flags can be either of PROFILE_SCRIPT_NONE or PROFILE_SCRIPT_MEMORY. Applies to Mono-compiled scripts only. 
+llSendRemoteData(key channel, string dest, integer idata, string sdata)[key] Send an XML-RPC request to dest through channel with payload of channel (in a string), integer idata and string sdata.\nA message identifier key is returned.\nAn XML-RPC reply will trigger a remote_data event and reference the message id.\nThe message_id is returned.
+llSensor(string name, key id, integer type, float range, float arc)Performs a single scan for name and id with type (AGENT, ACTIVE, PASSIVE, and/or SCRIPTED) within range meters and arc radians of forward vector (name, id, and/or keytype can be empty or 0)
+llSensorRemove()removes sensor
+llSensorRepeat(string name, key id, integer type, float range, float arc, float rate)sets a callback for name and id with type (AGENT, ACTIVE, PASSIVE, and/or SCRIPTED) within range meters and arc radians of forward vector (name, id, and/or keytype can be empty or 0) and repeats every rate seconds
+llSetAgentEnvironment llSetAgentEnvironment(key agent_id, float transition, list params Sets environment values for an individual agent in an experience. 'agent_id' is the key of an agent in the region and participating in the experience. 'transition' is the number of seconds over which to transition to the new settings. 	 'params' contains the parameters to retrieve from the current environment. 
+llSetAlpha(float alpha, integer face)sets the alpha
+llSetAngularVelocity llSetAngularVelocity(vector force, integer local Applies rotational velocity with 'force' to object and 'local' a boolean (if TRUE uses local axis, if FALSE uses region axis). 
+llSetAnimatedObjectVisualParams llSetAnimatedObjectVisualParams(list visual_params Takes a list of alternating params Ids (integers) and values (floats) in list 'visual_params', and applies them to the Animesh object containing the script calling this funtion. 
+llSetAnimationOverride llSetAnimationOverride(string anim_state, string anim Sets the animation that will play for the given animation state. Requires the runtime permission PERMISSION_OVERRIDE_ANIMATIONS. 
+llSetBuoyancy(float buoyancy)Set the tasks buoyancy (0 is none, < 1.0 sinks, 1.0 floats, > 1.0 rises)
+llSetCameraAtOffset(vector offset)Sets the camera at offset used in this object if an avatar sits on it
+llSetCameraEyeOffset(vector offset)Sets the camera eye offset used in this object if an avatar sits on it
+llSetCameraParams(list rules)Sets multiple camera parameters at once.\nList format is [ rule1, data1, rule2, data2 . . . rulen, datan ]
+llSetClickAction(integer action)Sets the action performed when a prim is clicked upon.
+llSetColor(vector color, integer face)sets the color
+llSetContentType llSetContentType(key request_id, integer content_type Sets the Internet media type of an LSL HTTP server response. content_type may be one of CONTENT_TYPE_TEXT (default), CONTENT_TYPE_HTML, CONTENT_TYPE_XML, CONTENT_TYPE_XHTML, CONTENT_TYPE_ATOM, CONTENT_TYPE_JSON, CONTENT_TYPE_LLSD, CONTENT_TYPE_FORM or CONTENT_TYPE_RSS. Only valid for embedded browsers on content owned by the person viewing. Falls back to CONTENT_TYPE_TEXT otherwise. 
+llSetDamage(float damage)Sets the amount of damage that will be done to an object that this task hits.  Task will be killed.
+llSetEnvironment integer llSetEnvironment(vector position, list params Overrides the environmental settings for a region or a parcel at 'position' with the environment parameters in 'params'. Returns 1 on success or a negative error code among ENV_* constants. 
+llSetForce(vector force, integer local)sets force on object, in local coords if local == TRUE (if the script is physical)
+llSetForceAndTorque(vector force, vector torque, integer local)sets the force and torque of object, in local coords if local == TRUE (if the script is physical)
+llSetHoverHeight(float height, integer water, float tau)Critically damps to a height (either above ground level or above the higher of land and water if water == TRUE)
+llSetInventoryPermMask(string item, integer mask, integer value)Sets the given permission mask to the new value on the inventory item.
+llSetKeyframedMotion llSetKeyframedMotion(list keyframes, list options Specifies a list of times, positions, and orientations to be followed by an object. The object will be smoothly moved between keyframes by the simulator. list keyframes: strided keyframe list of the form: - vector position (optional via KFM_TRANSLATION and KFM_DATA   - rotation orientation (optional via KFM_ROTATION and KFM_DATA   - float time list options: modifiers among:   - KFM_COMMAND followed by one of KFM_CMD_PLAY, KFM_CMD_STOP, KFM_CMD_PAUSE.   - KFM_MODE followed by one of KFM_FORWARD, KFM_LOOP, KFM_PING_PONG, KFM_REVERSE.   - KFM_DATA followed by KFM_ROTATION or KFM_TRANSLATION. Note that if KFM_COMMAND is provided in the options list, it must be the only option in the list, and cannot be specified in the same function call that sets the keyframes list. 
+llSetLinkAlpha(integer linknumber, float alpha, integer face)If a prim exists in the link chain at linknumber, set face to alpha
+llSetLinkCamera llSetLinkCamera(integer link, vector eye, vector at Sets the camera eye offset, and the offset that camera is looking at, for avatars that sit on the linked prim. The two vector parameters are offsets relative to the object's center and expressed in local coordinates. 
+llSetLinkColor(integer linknumber, vector color, integer face)If a task exists in the link chain at linknumber, set face to color
+llSetLinkMedia integer llSetLinkMedia(integer link, integer face, list params Set the media params for a particular face on the 'link'ed prim without a delay. Returns an integer that is flag (STATUS_OK when sucessful, another of the STATUS_* flags on failure) which details the success/failure of the operation(s). Takes the same parameters as llSetPrimMediaParams(). 
+llSetLinkPrimitiveParams(integer linknumber, list rules)Set primitive parameters for linknumber based on rules.
+llSetLinkRenderMaterial sleep_time 0.2 llSetLinkRenderMaterial(integer link, string material, integer face If a prim exists in the link set at link, sets the material of this prim's face. This function will clear most PRIM_GLTF_* properties on the face, with the exceptions of repeats, offsets, and rotation. 
+llSetLinkSitFlags sleep_time 0.2 llSetLinkSitFlags(integer link, integer flags Sets the sit 'flags' for the sit target in the 'link'. Sit flags (ORed SIT_FLAG_ALLOW_UNSIT, SIT_FLAG_SCRIPTED_ONLY, SIT_FLAG_NO_COLLIDE) only apply when a sit target is present in the link. 
+llSetLinkTexture(integer link_pos, string texture, integer face)Sets the texture of face for link_pos
+llSetLinkTextureAnim llSetLinkTextureAnim(integer link, integer mode, integer face, integer sizex, integer sizey, float start, float length, float rate Similar to llSetTextureAnim() but applies to any prim in the link set. 
+llSetLocalRot(rotation rot)sets the rotation of a child prim relative to the root prim
+llSetMemoryLimit integer llSetMemoryLimit(integer limit Request limit bytes to be reserved for this script. Returns a success/failure flag (STATUS_OK when sucessful, another of the STATUS_* flags on failure) for whether the memory limit was set. Only relevant for Mono-compiled scripts. 
+llSetObjectDesc(string name)Sets the object's description
+llSetObjectName(string name)Sets the objects name
+llSetObjectPermMask(integer mask, integer value)Sets the given permission mask to the new value on the root object the task is attached to.
+llSetParcelMusicURL(string url)Sets the streaming audio URL for the parcel object is on
+llSetPayPrice(integer price, list quick_pay_buttons)Sets the default amount when someone chooses to pay this object.
+llSetPhysicsMaterial llSetPhysicsMaterial(integer material_bits, float gravity_multiplier, float restitution, float friction, float density Sets the physics properties of the object the script is attached to. material_bits is a bitwise combination of DENSITY, FRICTION, RESTITUTION and GRAVITY_MULTIPLIER, specifying which floats to actually apply. 
+llSetPos(vector pos)sets the position (if the script isn't physical)
+llSetPrimitiveParams(list rules)Set primitive parameters based on rules.
+llSetPrimMediaParams sleep_time 1 llSetPrimMediaParams(integer face, list params Sets the media params for a particular face on an object. If media is not already on this object, add it. List is a set of name/value pairs in no particular order. Params not specified are unchanged, or if new media is added then set to the default specified. 
+llSetPrimURL(string url)Updates the URL for the web page shown on the sides of the object.
+llSetRegionPos integer llSetRegionPos(vector position Tries to moves the entire object so that the root prim is within 0.1m of position. On success the object is moved and TRUE is returned, on failure the object does not change position and FALSE is returned. 
+llSetRemoteScriptAccessPin(integer pin)If pin is set to a non-zero number, the task will accept remote script\nloads via llRemoteLoadScriptPin if it passes in the correct pin.\nOthersise, llRemoteLoadScriptPin is ignored.
+llSetRenderMaterial sleep_time 0.2 llSetRenderMaterial(string material, integer face Sets the material of this prim's face. This function will clear most PRIM_GLTF_* properties on the face, with the exceptions of repeats, offsets, and rotation. 
+llSetRot(rotation rot)sets the rotation (if the script isn't physical)
+llSetScale(vector scale)sets the scale
+llSetScriptState(string name, integer run)Control the state of a script name.
+llSetSitText(string text)Displays text rather than sit in pie menu
+llSetSoundQueueing(integer queue)determines whether attached sound calls wait for the current sound to finish (0 = no [default], nonzero = yes)
+llSetSoundRadius(float radius)establishes a hard cut-off radius for audibility of scripted sounds (both attached and triggered)
+llSetStatus(integer status, integer value)sets status (STATUS_PHYSICS, STATUS_PHANTOM, STATUS_BLOCK_GRAB,\nSTATUS_ROTATE_X, STATUS_ROTATE_Y, and/or STATUS_ROTATE_Z) to value
+llSetText(string text, vector color, float alpha)Set text floating over object
+llSetTexture(string texture, integer face)sets the texture of face
+llSetTextureAnim(integer mode, integer face, integer sizex, integer sizey, float start, float length, float rate)Animate the texture on the specified face/faces
+llSetTimerEvent(float sec)Cause the timer event to be triggered every sec seconds
+llSetTorque(vector torque, integer local)sets the torque of object, in local coords if local == TRUE (if the script is physical)
+llSetTouchText(string text)Displays text in pie menu that acts as a touch
+llSetVehicleFlags(integer flags)sets the enabled bits in 'flags'
+llSetVehicleFloatParam(integer param, float value)sets the specified vehicle float parameter
+llSetVehicleRotationParam(integer param, rotation rot)sets the specified vehicle rotation parameter
+llSetVehicleType(integer type)sets vehicle to one of the default types
+llSetVehicleVectorParam(integer param, vector vec)sets the specified vehicle vector parameter
+llSetVelocity llSetVelocity(vector force, integer local Applies velocity with 'force' to object and 'local' a boolean (if TRUE, force is treated as a local directional vector instead of region directional vector). 
+llSHA1String(string src)[string] Performs a SHA1 security Hash.  Returns a 40 character hex string.
+llSHA256String string llSHA256String(string src Returns a string of 64 hex characters that is the SHA-256 security hash of src. 
+llShout(integer channel, string msg)shouts msg on channel
+llSignRSA string llSignRSA(string private_key, string msg, string algorithm Returns a string that is the Base64-encoded RSA signature of 'msg' when using hash 'algorithm' and secret key 'private_key'. Can be paired with llVerifyRSA to pass verifiable messages. This function supports sha1, sha224, sha256, sha384, sha512 for 'algorithm' 
+llSin(float theta)[float] theta in radians
+llSitOnLink integer llSitOnLink(key agent_id, integer link The avatar specified by agent_id is forced to sit on the sit target of the prim indicated by the link parameter. This function must be called from an experience enabled script. Returns 1 if successful, or any of the negative SIT_* error codes. 
+llSitTarget(vector offset, rotation rot)Set the sit location for this object (if offset == <0,0,0> clear it)
+llSleep(float sec)Put script to sleep for sec seconds
+llSound(string sound, float volume, integer queue, integer loop)plays sound at volume and whether it should loop or not
+llSoundPreload(string sound)preloads a sound on viewers within range
+llSqrt(float val)[float] returns 0 and triggers a Math Error for imaginary results
+llStartAnimation(string anim)Start animation anim for agent that owns object
+llStopAnimation(string anim)Stop animation anim for agent that owns object
+llStopHover()Stop hovering to a height
+llStopLookAt()Stop causing object name to point at a target
+llStopMoveToTarget()Stops critically damped motion
+llStopObjectAnimation  llStartObjectAnimation(string anim Stops animation anim for the current object. anim must be the name or the UUID of an animation in the inventory of that object. 
+llStopPointAt()Stop agent that owns object pointing
+llStopSound()Stops currently attached sound
+llStringLength(string str)[integer] Returns the length of string
+llStringToBase64(string str)[string] Converts a string to the Base 64 representation of the string.
+llStringTrim(string src, integer trim_type)[string] Trim leading and/or trailing spaces from a string.\nUses trim_type of STRING_TRIM, STRING_TRIM_HEAD or STRING_TRIM_TAIL.
+llSubStringIndex(string source, string pattern)[integer] Finds index in source where pattern first appears (returns -1 if not found)
+llTakeCamera(key avatar)Move avatar's viewpoint to task
+llTakeControls(integer controls, integer accept, integer pass_on)Take controls from agent task has permissions for.  If (accept == (controls & input)), send input to task.  If pass_on send to agent also.
+llTan(float theta)[float] theta radians
+llTarget(vector position, float range)[integer] set positions within range of position as a target and return an ID for the target
+llTargetedEmail llTargetedEmail(integer target, string subject, string message Sends an email to the owner or creator (selected by 'target') of the object with 'subject' and 'message'. 
+llTargetOmega(vector axis, float spinrate, float gain)Attempt to spin at spinrate with strength gain
+llTargetRemove(integer number)removes target number
+llTeleportAgent llTeleportAgent(key avatar, string landmark, vector position, vector look_at Teleports avatar to a landmark stored in the object's inventory. If no landmark is provided (an empty string), the avatar is teleported to the location position in the current region. In either case, the avatar is turned to face the position given by look_at in local coordinates. To run this function the script must request and obtain the PERMISSION_TELEPORT permission. 
+llTeleportAgentGlobalCoords llTeleportAgent(key avatar, vector global_coordinates, vector region_coordinates, vector look_at Teleports avatar to region_coordinates within a region at the specified global_coordinates. The agent lands facing the position defined by look_at local coordinates. To run this function the script must request and obtain the PERMISSION_TELEPORT permission. It contains a text box for input, and if entered that text is chatted on chat_channel. 
+llTeleportAgentHome(key id)Teleports agent on owner's land to agent's home location
+llTextBox(key avatar, string message, integer chat_channel)Shows a dialog box on the avatar's screen with the message.\nA text box asks for input, and if entered the text is chatted on chat_channel.
+llToLower(string src)[string] convert src to all lower case and returns the result
+llToUpper(string src)[string] convert src to all upper case and returns the result
+llTransferLindenDollars key llTransferLindenDollars(key id, integer amount Attempt to transfer amount of L$ from the owner of the object to 'id'. Requires PERMISSION_DEBIT. Returns a key used in a matching transaction_result() event for the success or failure of the transfer. 
+llTriggerSound(string sound, float volume)plays sound at volume (0.0 - 1.0), centered at but not attached to object
+llTriggerSoundLimited(string sound, float volume, vector tne, vector bsw)plays sound at volume (0.0 - 1.0), centered at but not attached to object, limited to AABB defined by vectors top-north-east and bottom-south-west
+llUnescapeURL(string url)[string] Returns and unescaped/unencoded version of url, replacing %20 with spaces etc.
+llUnSit(key id)If agent identified by id is sitting on the object the script is attached to or is over land owned by the objects owner, the agent is forced to stand up
+llUpdateCharacter llUpdateCharacter(list options Updates settings for a character (same settings as for llCreateCharacter()). 'options' is a list containing the configuration options (CHARACTER_DESIRED_SPEED, CHARACTER_RADIUS, CHARACTER_LENGTH, CHARACTER_ORIENTATION, TRAVERSAL_TYPE, CHARACTER_TYPE, CHARACTER_AVOIDANCE_MODE, CHARACTER_MAX_ACCEL, CHARACTER_MAX_DECEL, CHARACTER_DESIRED_TURN_SPEED, CHARACTER_MAX_TURN_RADIUS, CHARACTER_MAX_SPEED, CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES, CHARACTER_STAY_WITHIN_PARCEL), each followed with their associated value. 
+llUpdateKeyValue key llUpdateKeyValue(string key_name, string value, integer checked, string original_value Starts an asynchronous transaction to update a key-value pair associated with the given experience key with the given key and value. 'checked' is a boolean (TRUE if the original value is given and the update should be checked to make sure it is atomic). Returns a handle key for use in the dataserver callback. 
+llVecDist(vector v1, vector v2)[float] returns the 3D distance between v1 and v2
+llVecMag(vector v)[float] returns the magnitude of v
+llVecNorm(vector v)[vector] returns the v normalized
+llVolumeDetect(integer detect)If detect = TRUE, object becomes phantom but triggers collision_start and collision_end events\nwhen other objects start and stop interpenetrating.\nMust be applied to the root object.
+llWanderWithin llWanderWithin(vector origin, vector dist list options Sets a character to wander about a central spot within a specified radius. 'origin' central point to wander about. 'dist' sets how far the character may wander from origin, along each world-aligned axis. 'options' is a list containing options (WANDER_PAUSE_AT_WAYPOINTS) with their associated parameter. 
+llWater(vector v)[float] returns the water height below the object position + v
+llWhisper(integer channel, string msg)whispers msg on channel
+llWind(vector v)[vector] returns the wind velocity at the object position + v
+llWorldPosToHUD vector llWorldPosToHUD(vector word_pos Returns a vector position in HUD frame that would place the center of the HUD object directly over 'world_pos' as viewed by the current camera. 
+llXorBase64 string llXorBase64(string str1, string str2 Returns a string that is a Base64 XOR of Base64-formatted input strings, str1 and str2. Replaces the old, buggy llXorBase64StringsCorrect() and llXorBase64Strings() functions. 
+llXorBase64Strings sleep_time 0.3 string llXorBase64Strings(string s1, string s2 DEPRECATED !  Please use llXorBase64() instead. Incorrectly performs an exclusive or on two Base64 strings and returns a Base64 string. 
+llXorBase64StringsCorrect(string s1, string s2)[string] Correctly performs an exclusive or on two Base 64 strings and returns a Base 64 string.  s2 repeats if it is shorter than s1.
+CONSTANTS(this)text
+# --- Combat 2.0 additions below ---
+# --- OpenSim and Aurora-Sim constants Below ---
+# Aurora-Sim Constants  (\Aurora\AuroraDotNetEngine\APIs\AA_Constants.cs)
+# Aurora botFunctions
+# Constants for cmWindlight (\OpenSim\Region\ScriptEngine\Shared\Api\Runtime\CM_Constants.cs)
+# OpenSim Constants (\OpenSim\Region\ScriptEngine\Shared\Api\Runtime\LSL_Constants.cs)
+# OpenSim NPC
+# osGetRegionStats
+# PERMISSION_CHANGE_JOINTS Passed to llRequestPermissions library function to request permission to change joints (not implemented)
+# PERMISSION_CHANGE_PERMISSIONS Passed to llRequestPermissions library function to request permission to change permissions
+# PERMISSION_RELEASE_OWNERSHIP Passed to llRequestPermissions library function to request permission to release ownership (not implemented)
+# PERMISSION_REMAP_CONTROLS Passed to llRequestPermissions library function to request permission to remap agent's controls (not implemented yet)
+# some vehicle params
+# Windlight/Lightshare
+# WL Constants added unique to Aurora-Sim
+#KFM_CMD_SET_MODE TODO: add documentation
+VP_HOVER     Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+__AGENT_ID__  Preprocessor special define expanding to a string reflecting the logged-in agent UUID.
+__AGENT_NAME__  Preprocessor special define expanding to a string reflecting the logged-in agent (legacy) name.
+__DATE__   Preprocessor special define expanding to a string reflecting the current date.
+__FILE__   Preprocessor special define expanding to a string reflecting the name of the file being preprocessed.
+__LINE__   Preprocessor special define expanding to an integer reflecting the current line number in the file being preprocessed.
+__TIME__   Preprocessor special define expanding to a string reflecting the current time.
+ACTIVE      Passed in llSensor library function to look for moving objects
+ADD_GRAVITY_FORCE      add_gravity_force.
+ADD_GRAVITY_POINT      add_gravity_point.
+AGENT Passed in llSensor library function to look for other Agents; DEPRECATED: Use AGENT_BY_LEGACY_NAME
+AGENT_ALWAYS_RUN  Returned by llGetAgentInfo if the Agent has 'Always Run' enabled
+AGENT_ATTACHMENTS    Returned by llGetAgentInfo if the Agent has attachments
+AGENT_AUTOMATED  Returned by llGetAgentInfo if the Agent is marked as a bot
+AGENT_AUTOPILOT   Returned by llGetAgentInfo if the Agent is under autopilot control
+AGENT_AWAY     Returned by llGetAgentInfo if the Agent is in away mode
+AGENT_BUSY     Returned by llGetAgentInfo if the Agent is busy
+AGENT_BY_LEGACY_NAME Passed in llSensor library function to look for other Agents by legacy name
+AGENT_BY_USERNAME    Passed in llSensor library function to look for other Agents by username
+AGENT_CROUCHING   Returned by llGetAgentInfo if the Agent is crouching
+AGENT_FLYING   Returned by llGetAgentInfo if the Agent is flying
+AGENT_IN_AIR   Returned by llGetAgentInfo if the Agent is in the air
+AGENT_LIST_PARCEL    Passed to llGetAgentList to return only agents on the same parcel where the script is running
+AGENT_LIST_PARCEL_OWNER Passed to llGetAgentList to return only agents on any parcel in the region where the parcel owner is the same as the owner of the parcel under the scripted object
+AGENT_LIST_REGION    Passed to llGetAgentList to return any/all agents in the region
+AGENT_MOUSELOOK   Returned by llGetAgentInfo if the Agent is in mouselook
+AGENT_ON_OBJECT   Returned by llGetAgentInfo if the Agent is sitting on an object
+AGENT_SCRIPTED    Returned by llGetAgentInfo if the Agent has scripted attachments
+AGENT_SITTING     Returned by llGetAgentInfo if the Agent is sitting
+AGENT_TYPING   Returned by llGetAgentInfo if the Agent is typing
+AGENT_WALKING     Returned by llGetAgentInfo if the Agent is walking
+ALL_SIDES    Passed to various texture and color library functions to modify all sides
+ANIM_ON   Enable texture animation
+ATTACH_AVATAR_CENTER     Passed to llAttachToAvatar to attach task to avatar center
+ATTACH_BACK  Passed to llAttachToAvatar to attach task to back
+ATTACH_BELLY Passed to llAttachToAvatar to attach task to belly
+ATTACH_CHEST Passed to llAttachToAvatar to attach task to chest
+ATTACH_CHIN  Passed to llAttachToAvatar to attach task to chin
+ATTACH_FACE_JAW   Passed to llAttachToAvatar to attach task to jaw
+ATTACH_FACE_LEAR  Passed to llAttachToAvatar to attach task to left ear (extended)
+ATTACH_FACE_LEYE  Passed to llAttachToAvatar to attach task to left eye (extended)
+ATTACH_FACE_REAR  Passed to llAttachToAvatar to attach task to right ear (extended)
+ATTACH_FACE_REYE  Passed to llAttachToAvatar to attach task to right eye (extended)
+ATTACH_FACE_TONGUE  Passed to llAttachToAvatar to attach task to tongue
+ATTACH_GROIN   Passed to llAttachToAvatar to attach task to groin
+ATTACH_HEAD  Passed to llAttachToAvatar to attach task to head
+ATTACH_HIND_LFOOT  Passed to llAttachToAvatar to attach task to left hind foot
+ATTACH_HIND_RFOOT  Passed to llAttachToAvatar to attach task to right hind foot
+ATTACH_HUD_BOTTOM  Passed to llAttachToAvatar to attach task to bottom hud area
+ATTACH_HUD_BOTTOM_LEFT      Passed to llAttachToAvatar to attach task to bottom left hud area
+ATTACH_HUD_BOTTOM_RIGHT     Passed to llAttachToAvatar to attach task to bottom right hud area
+ATTACH_HUD_CENTER_1      Passed to llAttachToAvatar to attach task to center 1 hud area
+ATTACH_HUD_CENTER_2      Passed to llAttachToAvatar to attach task to center 2 hud area
+ATTACH_HUD_TOP_CENTER Passed to llAttachToAvatar to attach task to top center hud area
+ATTACH_HUD_TOP_LEFT      Passed to llAttachToAvatar to attach task to top left hud area
+ATTACH_HUD_TOP_RIGHT     Passed to llAttachToAvatar to attach task to top right hud area
+ATTACH_LEAR  Passed to llAttachToAvatar to attach task to left ear
+ATTACH_LEFT_PEC Passed to llAttachToAvatar to attach task to left pectoral
+ATTACH_LEYE  Passed to llAttachToAvatar to attach task to left eye
+ATTACH_LFOOT Passed to llAttachToAvatar to attach task to left foot
+ATTACH_LHAND Passed to llAttachToAvatar to attach task to left hand
+ATTACH_LHAND_RING1  Passed to llAttachToAvatar to attach task to left ring finger
+ATTACH_LHIP  Passed to llAttachToAvatar to attach task to left hip
+ATTACH_LLARM Passed to llAttachToAvatar to attach task to left lower arm
+ATTACH_LLLEG Passed to llAttachToAvatar to attach task to left lower leg
+ATTACH_LSHOULDER      Passed to llAttachToAvatar to attach task to left shoulder
+ATTACH_LUARM Passed to llAttachToAvatar to attach task to left upper arm
+ATTACH_LULEG Passed to llAttachToAvatar to attach task to left upper leg
+ATTACH_LWING   Passed to llAttachToAvatar to attach task to left wing
+ATTACH_MOUTH Passed to llAttachToAvatar to attach task to mouth
+ATTACH_NECK  Passed to llAttachToAvatar to attach task to neck
+ATTACH_NOSE  Passed to llAttachToAvatar to attach task to nose
+ATTACH_PELVIS   Passed to llAttachToAvatar to attach task to pelvis
+ATTACH_REAR  Passed to llAttachToAvatar to attach task to right ear
+ATTACH_REYE  Passed to llAttachToAvatar to attach task to right eye
+ATTACH_RFOOT Passed to llAttachToAvatar to attach task to right foot
+ATTACH_RHAND Passed to llAttachToAvatar to attach task to right hand
+ATTACH_RHAND_RING1  Passed to llAttachToAvatar to attach task to right ring finger
+ATTACH_RHIP       Passed to llAttachToAvatar to attach task to right hip
+ATTACH_RIGHT_PEC      Passed to llAttachToAvatar to attach task to right pectoral
+ATTACH_RLARM Passed to llAttachToAvatar to attach task to right lower arm
+ATTACH_RLLEG Passed to llAttachToAvatar to attach task to right lower leg
+ATTACH_RSHOULDER      Passed to llAttachToAvatar to attach task to right shoulder
+ATTACH_RUARM Passed to llAttachToAvatar to attach task to right upper arm
+ATTACH_RULEG Passed to llAttachToAvatar to attach task to right upper leg
+ATTACH_RWING   Passed to llAttachToAvatar to attach task to right wing
+ATTACH_TAIL_BASE  Passed to llAttachToAvatar to attach task to tail base
+ATTACH_TAIL_TIP   Passed to llAttachToAvatar to attach task to tail tip
+AVOID_CHARACTERS TODO: add documentation
+AVOID_DYNAMIC_OBSTACLES      TODO: add documentation
+AVOID_NONE TODO: add documentation
+BAD_AGENT     Returned by llOpenFloater() if there was an issue finding the owner.
+BOT_FOLLOW_FLAG_FORCEDIRECTPATH value 4.
+BOT_FOLLOW_FLAG_INDEFINITELY value 1.
+BOT_FOLLOW_FLAG_NONE   value 0.
+BOT_FOLLOW_FLY     value 2.
+BOT_FOLLOW_RUN     value 1.
+BOT_FOLLOW_TELEPORT    value 3.
+BOT_FOLLOW_TRIGGER_HERE_EVENT   value 1.
+BOT_FOLLOW_WAIT     value 4.
+BOT_FOLLOW_WALK     value 0.
+BOT_TAG_FIND_ALL    value AllBots.
+CAMERA_ACTIVE   (0 or 1) Turns on or off scripted control of the camera
+CAMERA_BEHINDNESS_ANGLE     (0 to 180) Sets the angle in degrees within which the camera is not constrained by changes in subject rotation
+CAMERA_BEHINDNESS_LAG (0.0 to 3.0) Sets how strongly the camera is forced to stay behind the target if outside of behindness angle
+CAMERA_DISTANCE (0.5 to 10) Sets how far away the camera wants to be from its subject
+CAMERA_FOCUS Sets the focus (target position) of the camera
+CAMERA_FOCUS_LAG      (0.0 to 3.0) How much the camera lags as it tries to aim towards the subject
+CAMERA_FOCUS_LOCKED      (0 or 1) Locks the camera focus so it will not move
+CAMERA_FOCUS_OFFSET      (-10 to 10) A vector that adjusts the position of the camera focus position relative to the subject
+CAMERA_FOCUS_OFFSET_X  OpenSim enhancement for llSetCameraParams(), adjusts the camera focus x position relative to the target. (float)
+CAMERA_FOCUS_OFFSET_Y  OpenSim enhancement for llSetCameraParams(), adjusts the camera focus y position relative to the target. (float)
+CAMERA_FOCUS_OFFSET_Z  OpenSim enhancement for llSetCameraParams(), adjusts the camera focus z position relative to the target. (float)
+CAMERA_FOCUS_THRESHOLD      (0.0 to 4.0) Sets the radius of a sphere around the camera's subject position within which its focus is not affected by subject motion
+CAMERA_FOCUS_X      OpenSim enhancement for llSetCameraParams(), sets camera x focus (target position) in region coordinates. (float)
+CAMERA_FOCUS_Y      OpenSim enhancement for llSetCameraParams(), sets camera y focus (target position) in region coordinates. (float)
+CAMERA_FOCUS_Z      OpenSim enhancement for llSetCameraParams(), sets camera z focus (target position) in region coordinates. (float)
+CAMERA_PITCH (-45 to 80) (Adjusts the angular amount that the camera aims straight ahead vs. straight down, maintaining the same distance. Analogous to 'incidence'.")
+CAMERA_POSITION Sets the position of the camera
+CAMERA_POSITION_LAG      (0.0 to 3.0)  How much the camera lags as it tries to move towards its 'ideal' position
+CAMERA_POSITION_LOCKED      (0 or 1) Locks the camera position so it will not move
+CAMERA_POSITION_THRESHOLD      (0.0 to 4.0) Sets the radius of a sphere around the camera's ideal position within which it is not affected by subject motion
+CAMERA_POSITION_X   OpenSim enhancement for llSetCameraParams(), sets camera x position in region coordinates. (float)
+CAMERA_POSITION_Y   OpenSim enhancement for llSetCameraParams(), sets camera y position in region coordinates. (float)
+CAMERA_POSITION_Z   OpenSim enhancement for llSetCameraParams(), sets camera z position in region coordinates. (float)
+CHANGED_ALLOWED_DROP     Parameter of changed event handler used to indicate a user dropped an inventory item:onto task that was allowed only by llAllowInventoryDrop function call
+CHANGED_ANIMATION   OpenSim change event animation change detection.
+CHANGED_COLOR   Parameter of changed event handler used to indicate change to task's color
+CHANGED_INVENTORY  Parameter of changed event handler used to indicate change to task's inventory
+CHANGED_LINK Parameter of changed event handler used to indicate change to task's link status
+CHANGED_MEDIA   Parameter of changed event handler used to indicate that media has changed on a face of the task
+CHANGED_OWNER   Parameter of changed event handler used to indicate change to task's owner ONLY when an object is sold as original or deeded to group
+CHANGED_REGION  Parameter of changed event handler used to indicate the region has changed
+CHANGED_REGION_START     Parameter of changed event handler used to indicate the region has been restarted
+CHANGED_RENDER_MATERIAL Parameter of changed event handler used to indicate that material overrides have changed on one or more faces
+CHANGED_SCALE   Parameter of changed event handler used to indicate change to task's scale
+CHANGED_SHAPE   Parameter of changed event handler used to indicate change to task's shape parameters
+CHANGED_TELEPORT      Parameter of changed event handler used to indicate teleport has completed
+CHANGED_TEXTURE Parameter of changed event handler used to indicate change to task's texture
+CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES  Defines if a character will attempt to catch up lost time if pathfinding performance is low. 
+CHARACTER_AVOIDANCE_MODE     Allows you to specify that a character should not try to avoid other characters, should not try to avoid dynamic obstacles (relatively fast moving objects and avatars), or both.
+CHARACTER_CMD_JUMP     Used with  llExecCharacterCmd(). Stops any current pathfinding operation. 
+CHARACTER_CMD_SMOOTH_STOP    Used with  llExecCharacterCmd(). Stops any current pathfinding operation in a smooth like fashion.
+CHARACTER_CMD_STOP     Used with  llExecCharacterCmd(). Makes the character jump.
+CHARACTER_DESIRED_SPEED      Speed of pursuit in meters per second.
+CHARACTER_DESIRED_TURN_SPEED  The character's maximum speed while turning--note that this is only loosely enforced (i.e., a character may turn at higher speeds under certain conditions)
+CHARACTER_LENGTH Set collision capsule length.
+CHARACTER_MAX_ACCEL     The character's maximum acceleration rate.
+CHARACTER_MAX_ANGULAR_ACCEL   TODO: add documentation
+CHARACTER_MAX_ANGULAR_SPEED   TODO: add documentation
+CHARACTER_MAX_DECEL     The character's maximum deceleration rate.
+CHARACTER_MAX_SPEED     The character's maximum speed. Affects speed when avoiding dynamic obstacles and when traversing low-walkability objects in TRAVERSAL_TYPE_FAST mode. 
+CHARACTER_MAX_TURN_RADIUS  The character's turn radius when traveling at CHARACTER_DESIRED_TURN_SPEED.
+CHARACTER_ORIENTATION     Set the character orientation.
+CHARACTER_RADIUS Set collision capsule radius.
+CHARACTER_STAY_WITHIN_PARCEL  Characters which have CHARACTER_STAY_WITHIN_PARCEL set to TRUE treat the parcel boundaries as one-way obstacles.
+CHARACTER_TURN_SPEED_MULTIPLIER  TODO: add documentation
+CHARACTER_TYPE   Specifies which walkability coefficient will be used by this character. Used in combination with one of the character type flags.
+CHARACTER_TYPE_A     Used for character types that you prefer move in a way consistent with humanoids.
+CHARACTER_TYPE_B     Used for character types that you prefer move in a way consistent with wild animals or off road vehicles.
+CHARACTER_TYPE_C     Used for mechanical character types or road going vehicles.
+CHARACTER_TYPE_D     Used for character types that are not consistent with the A, B, or C type.
+CHARACTER_TYPE_NONE     Used to set no specific character type. 
+CLICK_ACTION_BUY  Used with llSetClickAction to set buy as the default action when object is clicked
+CLICK_ACTION_DISABLED   Used with llSetClickAction to set no click action. No touches detected or passed.
+CLICK_ACTION_IGNORE  Used with llSetClickAction so that clicks go through the object to whatever is behind it. No touches detected or passed.
+CLICK_ACTION_NONE    Used with llSetClickAction to disable the click action
+CLICK_ACTION_OPEN    Used with llSetClickAction to set open as the default action when object is clicked
+CLICK_ACTION_OPEN_MEDIA Used with llSetClickAction to set open-media as the default action when object is clicked
+CLICK_ACTION_PAY  Used with llSetClickAction to set pay as the default action when object is clicked
+CLICK_ACTION_PLAY    Used with llSetClickAction to set play as the default action when object is clicked
+CLICK_ACTION_SIT  Used with llSetClickAction to set sit as the default action when object is clicked
+CLICK_ACTION_TOUCH   Used with llSetClickAction to set touch as the default action when object is clicked
+CLICK_ACTION_ZOOM    Used with llSetClickAction to set zoom in as the default action when object is clicked
+COMBAT_CHANNEL A channel reserved for combat related log events broadcast to the entire region.
+COMBAT_LOG_ID     Messages from the region to the combat log will all be from this ID.
+CONTENT_TYPE_ATOM    application/atom+xml
+CONTENT_TYPE_FORM    application/x-www-form-urlencoded
+CONTENT_TYPE_HTML    text/html
+CONTENT_TYPE_JSON    application/json
+CONTENT_TYPE_LLSD    application/llsd+xml
+CONTENT_TYPE_RSS     application/rss+xml
+CONTENT_TYPE_TEXT    text/plain
+CONTENT_TYPE_XHTML      application/xhtml+xml
+CONTENT_TYPE_XML     application/xml
+CONTROL_BACK   Passed to llTakeControls library function and used control event handler to test for agent back control
+CONTROL_DOWN   Passed to llTakeControls library function and used control event handler to test for agent down control
+CONTROL_FWD    Passed to llTakeControls library function and used control event handler to test for agent forward control
+CONTROL_LBUTTON   Passed to llTakeControls library function and used control event handler to test for agent left button control
+CONTROL_LEFT   Passed to llTakeControls library function and used control event handler to test for agent left control
+CONTROL_ML_LBUTTON   Passed to llTakeControls library function and used control event handler to test for agent left button control with the agent in mouse look
+CONTROL_RIGHT     Passed to llTakeControls library function and used control event handler to test for agent right control
+CONTROL_ROT_LEFT  Passed to llTakeControls library function and used control event handler to test for agent rotate left control
+CONTROL_ROT_RIGHT    Passed to llTakeControls library function and used control event handler to test for agent rotate right control
+CONTROL_UP     Passed to llTakeControls library function and used control event handler to test for agent up control
+DAMAGE_TYPE_ACID     Damage caused by a caustic substance, such as acid.
+DAMAGE_TYPE_ANTI_ARMOR  Damage caused by anti-tank/anti-armor. Such as from a specialised armor piercing shell, rocket or other munition.
+DAMAGE_TYPE_BLUDGEONING    Damage caused by a blunt object, such as a club.
+DAMAGE_TYPE_COLD     Damage inflicted by exposure to extreme cold.
+DAMAGE_TYPE_CRUSHING  Damage caused by crushing.
+DAMAGE_TYPE_ELECTRIC    Damage caused by electricity.
+DAMAGE_TYPE_EMOTIONAL   Damage caused by the realization that your dreams will never become reality.
+DAMAGE_TYPE_EXPLOSIVE  Damage caused by an explosive blast, like a grenade.
+DAMAGE_TYPE_FIRE     Damage inflicted by exposure to heat or flames.
+DAMAGE_TYPE_FORCE    Damage inflicted by a great force or impact.
+DAMAGE_TYPE_GENERIC     Generic or legacy damage.
+DAMAGE_TYPE_IMPACT      System damage generated by impact with terrain or a prim.
+DAMAGE_TYPE_MEDICAL   Negative damage to heal a wound, damaged limb, first aid, etc. Intended for generic healing of biological nature. Positive damage would be medical malpractice.
+DAMAGE_TYPE_NECROTIC    Damage caused by a direct assault on life-force.
+DAMAGE_TYPE_PIERCING    Damage caused by a piercing object such as a bullet, spear, or arrow.
+DAMAGE_TYPE_POISON      Damage caused by poison.
+DAMAGE_TYPE_PSYCHIC     Damage caused by a direct assault on the mind.
+DAMAGE_TYPE_RADIANT     Damage caused by radiation or extreme light.
+DAMAGE_TYPE_REPAIR   Negative damage from repairing an object or something mechanical, welding torch or wrench on a vehicle/robot/mech, etc. Positive damage can be due to mistakes, low skill or sabotage. Intended for generic healing of non-biological nature (e.g. a mechanical tank or an electrical system)
+DAMAGE_TYPE_SLASHING    Damage caused by a slashing object such as a sword or axe.
+DAMAGE_TYPE_SONIC    Damage caused by loud noises, like a Crash Worship concert.
+DAMAGE_TYPE_SUFFOCATION  Damage caused by suffocation. Usually lacking a breathable atmosphere, such as from drowning or being in the vacuum of space.
+DAMAGEABLE    Passed in llSensor library function to look for scripted objects with on_damage or final_damage events (i.e. able to process damage).
+DATA_BORN    Passed to llRequestAgentData to get born on date as a string
+DATA_NAME    Passed to llRequestAgentData to get full agent name
+DATA_ONLINE  Passed to llRequestAgentData to determine if agent is online
+DATA_PAYINFO Passed to llRequestAgentData to get payment status of an agent
+DATA_RATING  Passed to llRequestAgentData to get a comma separated sting of integer ratings
+DATA_SIM_POS Passed to llRequestSimulatorData to get a string (cast to vector) of a simulator's global position
+DATA_SIM_RATING Passed to llRequestSimulatorData to get the rating of a simulator
+DATA_SIM_STATUS Passed to llRequestSimulatorData to get the status of a simulator
+DEBUG_CHANNEL     Chat channel reserved for debug and error messages from scripts
+DENSITY    For use with llSetPhysicsMaterial() as a bitwise value in its material_bits parameter, to set the density.
+ENABLE_GRAVITY     enable_gravity.
+ENV_INVALID_AGENT    Returned by llGetEnvironment() or llsetEnvironment() when unable to find specified agent.
+ENV_INVALID_RULE    Returned by llGetEnvironment() or llsetEnvironment() when there was an issue with one of the rules.
+ENV_NO_ENVIRONMENT    Returned by llGetEnvironment() or llsetEnvironment() when the environment inventory object could not be found.
+ENV_NO_EXPERIENCE_LAND   Returned by llGetEnvironment() when the experience has not been enabled or can not run on the land.
+ENV_NO_EXPERIENCE_PERMISSION Returned by llGetEnvironment() when the agent has not granted permission.
+ENV_NO_PERMISSIONS    Returned by llSetEnvironment() when the script does not have rights to modify this parcel or region.
+ENV_NOT_EXPERIENCE    Returned by llGetEnvironment() when the script is not running as part of an experience with a valid experience key.
+ENV_THROTTLE     Returned by llSetEnvironment() or llsetEnvironment() when the scripts have exceeded the throttle. Wait and retry the request.
+ENV_VALIDATION_FAIL    Returned by llGetEnvironment() or llsetEnvironment() when unable to validate the passed values.
+ENVIRONMENT_DAYINFO    Returned by llGetEnvironment(), followed with integers day_length and day_offset, and float secs_since_midnight.
+EOF  Indicates the last line of a notecard was read
+ERR_GENERIC Returned by llReturnObjectsByID and llReturnObjectsByOwner in case of a general error.
+ERR_MALFORMED_PARAMS    Returned by llReturnObjectsByID and llReturnObjectsByOwner in case of malformed parameters.
+ERR_PARCEL_PERMISSIONS     Returned by llReturnObjectsByID and llReturnObjectsByOwner in case of a parcel owner permission error.
+ERR_RUNTIME_PERMISSIONS    Returned by llReturnObjectsByID and llReturnObjectsByOwner in case of a runtime permission error.
+ERR_THROTTLED     Returned by llReturnObjectsByID and llReturnObjectsByOwner in case of being throttled.
+ESTATE_ACCESS_ALLOWED_AGENT_ADD Passed to llManageEstateAccess to add the agent to this estate's Allowed Residents list
+ESTATE_ACCESS_ALLOWED_AGENT_REMOVE Passed to llManageEstateAccess to remove the agent from this estate's Allowed Residents list
+ESTATE_ACCESS_ALLOWED_GROUP_ADD Passed to llManageEstateAccess to add the group to this estate's Allowed groups list
+ESTATE_ACCESS_ALLOWED_GROUP_REMOVE Passed to llManageEstateAccess to remove the group from this estate's Allowed groups list 
+ESTATE_ACCESS_BANNED_AGENT_ADD  Passed to llManageEstateAccess to add the agent to this estate's Banned residents list
+ESTATE_ACCESS_BANNED_AGENT_REMOVE  Passed to llManageEstateAccess to remove the agent from this estate's Banned residents list
+FALSE Integer constant for Boolean operations
+FORCE_DIRECT_PATH      Used with llNavigateTo(). Makes character navigate in a straight line toward pos. May be set to TRUE or FALSE.
+FRICTION   For use with llSetPhysicsMaterial() as a bitwise value in its material_bits parameter, to set the friction.
+GAME_CONTROL_AXIS_LEFTX    Bitfield used by the game_control() event and passed as its axes parameter.
+GAME_CONTROL_AXIS_LEFTY    Bitfield used by the game_control() event and passed as its axes parameter.
+GAME_CONTROL_AXIS_RIGHTX   Bitfield used by the game_control() event and passed as its axes parameter.
+GAME_CONTROL_AXIS_RIGHTY   Bitfield used by the game_control() event and passed as its axes parameter.
+GAME_CONTROL_AXIS_TRIGGERLEFT  Bitfield used by the game_control() event and passed as its axes parameter.
+GAME_CONTROL_AXIS_TRIGGERRIGHT  Bitfield used by the game_control() event and passed as its axes parameter.
+GAME_CONTROL_BUTTON_A    Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_B    Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_BACK   Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_DPAD_DOWN  Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_DPAD_LEFT  Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_DPAD_RIGHT  Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_DPAD_UP   Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_GUIDE   Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_LEFTSHOULDER Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_LEFTSTICK  Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_MISC1   Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_PADDLE1   Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_PADDLE2   Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_PADDLE3   Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_PADDLE4   Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_RIGHTSHOULDER Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_RIGHTSTICK  Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_START   Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_TOUCHPAD  Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_X    Bitfield used by the game_control() event and passed as its button_levels parameter.
+GAME_CONTROL_BUTTON_Y    Bitfield used by the game_control() event and passed as its button_levels parameter.
+GCNP_RADIUS     Limits how far out to search for a navigation point. Followed with a float giving the distance in meters.
+GCNP_STATIC     Specifies whether the test should use the static or dynamic nav mesh. In the static case, all dynamic obstacles are ignored. Followed with a boolean.
+GRAVITY_FORCE_X     gravity_force_x.
+GRAVITY_FORCE_Y     gravity_force_y.
+GRAVITY_FORCE_Z     gravity_force_z.
+GRAVITY_MULTIPLIER     For use with llSetPhysicsMaterial() as a bitwise value in its material_bits parameter, to set the gravity multiplier.
+HORIZONTAL Constant to indicate that the orientation of the capsule for a Pathfinding character is horizontal.
+HTTP_BODY_MAXLENGTH     Used with llHTTPRequest to specify the maximum body size for the date returned from the request. Mono scripts can request from 1byte to 16k, non-mono scripts can request from 1byte to 4k. The default is 2k.
+HTTP_BODY_MAXLENGTH     Used with llHTTPRequest to specify the maximum response body to return
+HTTP_BODY_TRUNCATED     Used with http_response to indicate truncation point in bytes
+HTTP_CUSTOM_HEADER  Used with llHTTPRequest to set custom headers on outbound requests.
+HTTP_METHOD Used with llHTTPRequest to specify the method, "GET", "POST", "PUT", or "DELETE"
+HTTP_MIMETYPE  Used with llHTTPRequest to specify the MIME type, defaults to "text/plain"
+HTTP_PRAGMA_NO_CACHE Used with llHTTPRequest to send 'Pragma no-cache' in the header of the request.
+HTTP_VERBOSE_THROTTLE      Used with llHTTPRequest to shout error messages to DEBUG_CHANNEL if the outgoing request rate exceeds the server limit.
+HTTP_VERIFY_CERT  Used with llHTTPRequest to specify SSL certificate verification
+IMG_USE_BAKED_AUX1  UUID for the baked AUX1 texture (bake on mesh feature, Universal wearable)
+IMG_USE_BAKED_AUX2  UUID for the baked AUX2 texture (bake on mesh feature, Universal wearable)
+IMG_USE_BAKED_AUX3  UUID for the baked AUX3 texture (bake on mesh feature, Universal wearable)
+IMG_USE_BAKED_EYES  UUID for the baked eyes texture (bake on mesh feature)
+IMG_USE_BAKED_HAIR  UUID for the baked hair texture (bake on mesh feature)
+IMG_USE_BAKED_HEAD  UUID for the baked head texture (bake on mesh feature)
+IMG_USE_BAKED_LEFTARM UUID for the baked left arm texture (bake on mesh feature)
+IMG_USE_BAKED_LEFTLEG UUID for the baked left leg texture (bake on mesh feature)
+IMG_USE_BAKED_LOWER  UUID for the baked lower body texture (bake on mesh feature)
+IMG_USE_BAKED_SKIRT  UUID for the baked skirt texture (bake on mesh feature)
+IMG_USE_BAKED_UPPER  UUID for the baked upper body texture (bake on mesh feature)
+INVENTORY_ALL   Passed to task inventory library functions to reference all inventory items
+INVENTORY_ANIMATION      Passed to task inventory library functions to reference animations
+INVENTORY_BODYPART Passed to task inventory library functions to reference body parts
+INVENTORY_CLOTHING Passed to task inventory library functions to reference clothing
+INVENTORY_GESTURE  Passed to task inventory library functions to reference gestures
+INVENTORY_LANDMARK Passed to task inventory library functions to reference landmarks
+INVENTORY_MATERIAL Passed to task inventory library functions to reference materials
+INVENTORY_NONE  Returned by llGetInventoryType when no item is found
+INVENTORY_NOTECARD Passed to task inventory library functions to reference notecards
+INVENTORY_OBJECT      Passed to task inventory library functions to reference objects
+INVENTORY_SCRIPT      Passed to task inventory library functions to reference scripts
+INVENTORY_SETTING Passed to task inventory library functions to reference settings
+INVENTORY_SOUND Passed to task inventory library functions to reference sounds
+INVENTORY_TEXTURE  Passed to task inventory library functions to reference textures
+JSON_APPEND Used with llJsonSetValue as a specifier to indicate appending the value to the end of the array at that level.
+JSON_ARRAY  Represents a json datatype mappable to the LSL datatype "list"
+JSON_DELETE  Specifier constant for use with llJsonSetValue() to delete a value within a JSON text string.
+JSON_FALSE  Represents the constant "false" of a json value.
+JSON_INVALID      Returned by llJsonGetValue and llJsonValueType if the specifiers to do specify a valid in the json value.
+JSON_NULL      Represents the constant "null" of a json value.
+JSON_NUMBER Represents a json datatype mappable to the LSL datatypes "integer" and "float"
+JSON_OBJECT Represents a json datatype represented in LSL as a strided list of name/value pairs
+JSON_STRING Represents a json datatype mappable to the LSL datatype "string"
+JSON_TRUE      Represents the constant "true" of a json value.
+KFM_CMD_PAUSE Option for llSetKeyframedMotion(), used after KFM_COMMAND to pause the motion.
+KFM_CMD_PLAY  Option for llSetKeyframedMotion(), used after KFM_COMMAND to play the motion.
+KFM_CMD_STOP  Option for llSetKeyframedMotion(), used after KFM_COMMAND to stop the motion.
+KFM_COMMAND   Option for llSetKeyframedMotion(), followed by one of KFM_CMD_STOP, KFM_CMD_PLAY, KFM_CMD_PAUSE. Note that KFM_COMMAND must be the only option in the list, and cannot be specified in the same function call that sets the keyframes list.
+KFM_DATA   Option for llSetKeyframedMotion(), followed by a bitwise combination of KFM_TRANSLATION and KFM_ROTATION. If you specify one or the other, you should only include translations or rotations in your keyframe list.
+KFM_FORWARD   Option for llSetKeyframedMotion(), used after KFM_MODE to specify the forward playback mode.
+KFM_LOOP   Option for llSetKeyframedMotion(), used after KFM_MODE to specify the loop playback mode.
+KFM_MODE   Option for llSetKeyframedMotion(), used to specify the playback mode, followed by one of KFM_FORWARD, KFM_LOOP, KFM_PING_PONG or KFM_REVERSE.
+KFM_PING_PONG Option for llSetKeyframedMotion(), used after KFM_MODE to specify the ping pong playback mode.
+KFM_REVERSE   Option for llSetKeyframedMotion(), used after KFM_MODE to specify the reverse playback mode.
+KFM_ROTATION  Option for llSetKeyframedMotion(), used after KFM_DATA, possibly as a bitwise combination with KFM_TRANSLATION.
+KFM_TRANSLATION  Option for llSetKeyframedMotion(), used after KFM_DATA, possibly as a bitwise combination with KFM_ROTATION.
+LAND_LARGE_BRUSH      Passed to llModifyLand to modify large land areas
+LAND_LEVEL   Passed to llModifyLand to level terrain
+LAND_LOWER   Passed to llModifyLand to lower terrain
+LAND_MEDIUM_BRUSH  Passed to llModifyLand to modify medium land areas
+LAND_NOISE   Passed to llModifyLand to randomize terrain
+LAND_RAISE   Passed to llModifyLand to raise terrain
+LAND_REVERT  Passed to llModifyLand to revert terrain toward original state
+LAND_SMALL_BRUSH      Passed to llModifyLand to modify small land areas
+LAND_SMOOTH  Passed to llModifyLand to smooth terrain
+LINK_ALL_CHILDREN  Passed to various link functions to modify all child blocks in the object
+LINK_ALL_OTHERS Passed to various link functions to modify all other blocks in the object
+LINK_ROOT    Passed to various link functions to modify only the root block (no effect on single block objects)
+LINK_SET  Passed to various link functions to modify all blocks in the object
+LINK_THIS    Passed to various link functions to modify only the calling block
+LINKSETDATA_DELETE  A key in the linkset's datastore has been deleted. Either through a call to delete or write operation with an empty value.
+LINKSETDATA_EMEMORY  A name/value pair was too large to write to the linkset datastore.
+LINKSETDATA_ENOKEY  The name supplied for the linkset write operation was empty.
+LINKSETDATA_EPROTECTED The name/value pair has been protected from overwrite in the linkset's datastore.
+LINKSETDATA_NOTFOUND The named key could not be found in the linkset's datastore when attempting to delete it.
+LINKSETDATA_NOUPDATE The name/value pair stored in the linkset was not changed by the write operation because the value stored matches the value written.
+LINKSETDATA_OK   The name/value pair was written to the datastore.
+LINKSETDATA_RESET  The linkset's datastore has been cleared by a call to llLinksetDataReset().
+LINKSETDATA_UPDATE  A key in the linkset's datastore has been assigned a new value with a write operation.
+LIST_STAT_GEOMETRIC_MEAN      Used with llListStatistics to find the geometric mean of the numbers in a list (all numbers must be > 0)
+LIST_STAT_MAX  Used with llListStatistics to find the largest number in a list
+LIST_STAT_MEAN Used with llListStatistics to find the mean of the numbers in a list
+LIST_STAT_MEDIAN  Used with llListStatistics to find the median of the numbers in a list
+LIST_STAT_MIN  Used with llListStatistics to find the smallest number in a list
+LIST_STAT_NUM_COUNT     Used with llListStatistics to find how many numbers are in a list
+LIST_STAT_RANGE      Used with llListStatistics to find the range of the numbers in a list
+LIST_STAT_STD_DEV Used with llListStatistics to find the standard deviation of the numbers in a list
+LIST_STAT_SUM  Used with llListStatistics to find the sum of the numbers in a list
+LIST_STAT_SUM_SQUARES      Used with llListStatistics to find the sum of the squares of the numbers in a list
+LOOP   Loop when animating textures
+MASK_BASE   Base permissions
+MASK_EVERYONE  Everyone permissions
+MASK_GROUP  Group permissions
+MASK_NEXT   Next owner permissions
+MASK_OWNER  Owner permissions
+NAK      Indicates a failure to read a cached notecard line (notecard contents no more in cache)
+NOT_ATTACHMENT    Returned by llOpenFloater() if there was an issue finding the object, or the object is not an attachment.
+NOT_EXPERIENCE    Returned by llOpenFloater() if the script is not complied as part of an experience, or the experience is not privileged.
+NOT_EXPERIENCE_PERMISSIONS Returned by llOpenFloater() if there was an issue with the experience permissions.
+NULL_KEY      Indicates an empty key
+OBJECT_ACCOUNT_LEVEL   Used with llGetObjectDetails to return the account level of an avatar.
+OBJECT_ANIMATED_COUNT   Used with llGetObjectDetails to return the total number of  associated animated objects.
+OBJECT_ANIMATED_SLOTS_AVAILABLE Used with llGetObjectDetails to return the number of additional animated object attachments allowed.
+OBJECT_ATTACHED_POINT Used with llGetObjectDetails to get an object's attachment point.
+OBJECT_ATTACHED_SLOTS_AVAILABLE Used with llGetObjectDetails to return the number of attachment slots available for the avatar object.
+OBJECT_BODY_SHAPE_TYPE      This is a flag used with llGetObjectDetails to get the body type of the avatar, based on shape data. If no data is available, -1.0 is returned. This is normally between 0 and 1.0, with 0.5 and larger considered 'male'
+OBJECT_CHARACTER_TIME Used with llGetObjectDetails to get an object's average CPU time (in seconds) used by the object for navigation, if the object is a pathfinding character. Returns 0 for non-characters.
+OBJECT_CLICK_ACTION      This is a flag used with llGetObjectDetails to get the click action. The default is 0.
+OBJECT_CREATION_TIME   Used with llGetObjectDetails to return a string containing the object creation time.
+OBJECT_CREATOR  Used with llGetObjectDetails to get an object's creator's key
+OBJECT_DAMAGE    References the damage amount delivered by a prim on collision.
+OBJECT_DAMAGE_TYPE   References the damage type that is applied when this prim collides with another object. Can match one of the DAMAGE_TYPE_* constants, be a custom damage type or be a repurposed damage field.
+OBJECT_DESC  Used with llGetObjectDetails to get an object's description
+OBJECT_GROUP Used with llGetObjectDetails to get an object's group's key
+OBJECT_GROUP_TAG    Used with llGetObjectDetails to return the avatar group tag string (if the object is not an avatar, an empty string is returned).
+OBJECT_HEALTH     Gets the health of the object.
+OBJECT_HOVER_HEIGHT      This is a flag used with llGetObjectDetails to get hover height of the avatar. If no data is available, 0.0 is returned.
+OBJECT_LAST_OWNER_ID     Gets the object's last owner ID.
+OBJECT_LINK_NUMBER    Used with llGetObjectDetails to get the object's index in the linkset.
+OBJECT_MASS      Used with llGetObjectDetails to get the mass in kilograms of this object's linkset.
+OBJECT_MATERIAL     Used with llGetObjectDetails to get the physics material set on this object.
+OBJECT_NAME  Used with llGetObjectDetails to get an object's name
+OBJECT_OMEGA     Used with llGetObjectDetails to return the object rotational velocity vector.
+OBJECT_OWNER Used with llGetObjectDetails to get an object's owner's key.  Will be NULL_KEY if group owned
+OBJECT_PATHFINDING_TYPE     Used with llGetObjectDetails to get an object's pathfinding settings.
+OBJECT_PHANTOM     Used with llGetObjectDetails and returning a boolean indicating whether or not the object is phantom.
+OBJECT_PHYSICS     Used with llGetObjectDetails and returning a boolean indicating whether or not the object is physical.
+OBJECT_PHYSICS_COST      Used with llGetObjectDetails to get the physics cost.
+OBJECT_POS   Used with llGetObjectDetails to get an object's position
+OBJECT_PRIM_COUNT    Used with llGetObjectDetails to return the object total primitives count.
+OBJECT_PRIM_EQUIVALENCE     Gets the prim equivalence of the object.
+OBJECT_RENDER_WEIGHT   Used with llGetObjectDetails to return an avatar's rendering weight.
+OBJECT_RETURN_PARCEL     Used with llReturnObjectsByOwner to return all objects on the same parcel as the script which are owned by 'owner'.
+OBJECT_RETURN_PARCEL_OWNER     Used with llReturnObjectsByOwner to return all objects owned by 'owner' which are over parcels owned by the owner of the script.
+OBJECT_RETURN_REGION     Used with llReturnObjectsByOwner to return all objects in the region owned by 'owner' - only works when the script is owned by the estate owner or an estate manager.
+OBJECT_REZ_TIME     Used with llGetObjectDetails to get the time that this object was rezzed.
+OBJECT_REZZER_KEY    Used with llGetObjectDetails to return the parent object id.
+OBJECT_ROOT  Used with llGetObjectDetails to get an object's root prim ID.
+OBJECT_ROT   Used with llGetObjectDetails to get an object's rotation
+OBJECT_RUNNING_SCRIPT_COUNT    Gets the number of running scripts attached to the object or agent
+OBJECT_SCALE     Used with llGetObjectDetails to get the size of this object.
+OBJECT_SCRIPT_MEMORY     Gets the total amount of script memory allocated to the object or agent, in bytes. 
+OBJECT_SCRIPT_TIME Gets the total amount of average script CPU time used by the object or agent, in seconds. 
+OBJECT_SELECT_COUNT    Used with llGetObjectDetails to return the total number of agents selecting any links in the object.
+OBJECT_SERVER_COST Used with llGetObjectDetails to get the server cost.
+OBJECT_SIT_COUNT    Used with llGetObjectDetails to return the total number of agents sitting on any links in the object.
+OBJECT_STREAMING_COST Used with llGetObjectDetails to get the streaming (download) cost.
+OBJECT_TEMP_ATTACHED   Used with llGetObjectDetails to return TRUE when the object is a temporary attachment.
+OBJECT_TEMP_ON_REZ    Used with llGetObjectDetails and returning a boolean indicating whether or not the object is temp on rez.
+OBJECT_TEXT      Used with llGetObjectDetails to get the floating text displayed above this object.
+OBJECT_TEXT_ALPHA    Used with llGetObjectDetails to get the alpha value of the floating text displayed above this object.
+OBJECT_TEXT_COLOR    Used with llGetObjectDetails to get the color of the floating text displayed above this object.
+OBJECT_TOTAL_INVENTORY_COUNT Used with llGetObjectDetails to return the object total inventory count.
+OBJECT_TOTAL_SCRIPT_COUNT      Gets the number of scripts, both running and stopped, attached to the object or agent.
+OBJECT_UNKNOWN_DETAIL Returned by llGetObjectDetails when passed an invalid object parameter type
+OBJECT_VELOCITY Used with llGetObjectDetails to get an object's velocity
+OPT_AVATAR   Returned object pathfinding type by llGetObjectDetails for avatars.
+OPT_CHARACTER    Value returned by llGetObjectDetails when passed OBJECT_PATHFINDING_TYPE for pathfinding characters.
+OPT_EXCLUSION_VOLUME     Returned object pathfinding type by llGetObjectDetails for exclusion volumes.
+OPT_LEGACY_LINKSET Returned object pathfinding type by llGetObjectDetails for movable obstacles, movable phantoms, physical, and volumedetect objects.
+OPT_MATERIAL_VOLUME      Returned object pathfinding type by llGetObjectDetails for material volumes.
+OPT_OTHER     Value returned by llGetObjectDetails when passed OBJECT_PATHFINDING_TYPE for attachments, Linden trees and grass.
+OPT_PATHFINDING_CHARACTER      Returned object pathfinding type by llGetObjectDetails for pathfinding characters.
+OPT_STATIC_OBSTACLE      Returned object pathfinding type by llGetObjectDetails for static obstacles.
+OPT_UNKNOWN  Returned object pathfinding type by llGetObjectDetails for attachments, Linden trees and grass.
+OPT_WALKABLE Returned object pathfinding type by llGetObjectDetails for walkable objects.
+OS_ATTACH_MSG_ALL   Used with osMessageAttachements
+OS_ATTACH_MSG_INVERT_POINTS  Used with osMessageAttachements
+OS_ATTACH_MSG_OBJECT_CREATOR Used with osMessageAttachements
+OS_ATTACH_MSG_SCRIPT_CREATOR Used with osMessageAttachements
+OS_LISTEN_REGEX_MESSAGE   Value 0x2, process name parameter as regex
+OS_LISTEN_REGEX_NAME   Value 0x1, process name parameter as regex
+OS_NPC      used by osNPC. Value 0x01000000
+OS_NPC_CREATOR_OWNED used by osNPC. Value 0x1
+OS_NPC_FLY     used by osNPC. Value 0
+OS_NPC_LAND_AT_TARGET   used by osNPC. Value 2
+OS_NPC_NO_FLY     used by osNPC. Value 1
+OS_NPC_NOT_OWNED  used by osNPC. Value 0x2
+OS_NPC_RUNNING    used by osNPC. Value 4
+OS_NPC_SENSE_AS_AGENT   used by osNPC. Value 0x4
+OS_NPC_SIT_NOW    used by osNPC. Value 0
+PARCEL_COUNT_GROUP      Used with llGetParcelPrimCount to get the number of prims on the parcel owned by the group
+PARCEL_COUNT_OTHER      Used with llGetParcelPrimCount to get the number of prims on the parcel owned by others
+PARCEL_COUNT_OWNER      Used with llGetParcelPrimCount to get the number of prims on the parcel owned by the owner
+PARCEL_COUNT_SELECTED      Used with llGetParcelPrimCount to get the number of prims on the parcel currently selected or sat upon
+PARCEL_COUNT_TEMP Used with llGetParcelPrimCount to get the number of prims on the parcel that are temp on rez
+PARCEL_COUNT_TOTAL      Used with llGetParcelPrimCount to get the total number of prims on the parcel
+PARCEL_DETAILS_AREA     Used with llGetParcelDetails to get the parcel area in square meters
+PARCEL_DETAILS_CLAIMDATE  Used with osSetParcelDetails
+PARCEL_DETAILS_DESC     Used with llGetParcelDetails to get the parcel description
+PARCEL_DETAILS_FLAGS   Used with llGetParcelDetails to get the parcel flags.
+PARCEL_DETAILS_GROUP Used with llGetParcelDetails to get the parcel group id
+PARCEL_DETAILS_ID Used with llGetParcelDetails to get the parcel id
+PARCEL_DETAILS_LANDING_LOOKAT Used with llGetParcelDetails to get the parcel landing point look-at vector, if any.
+PARCEL_DETAILS_LANDING_POINT Used with llGetParcelDetails to get the parcel landing point, if any.
+PARCEL_DETAILS_NAME     Used with llGetParcelDetails to get the parcel name
+PARCEL_DETAILS_OWNER Used with llGetParcelDetails to get the parcel owner id
+PARCEL_DETAILS_PRIM_CAPACITY Used with llGetParcelDetails to get the parcel prim capacity.
+PARCEL_DETAILS_PRIM_USED  Used with llGetParcelDetails to get the parcel prim usage.
+PARCEL_DETAILS_SCRIPT_DANGER Used with llGetParcelDetails to determine if the script is in danger in the parcel.
+PARCEL_DETAILS_SEE_AVATARS    Used with llGetParcelDetails to get the avatars visibility setting
+PARCEL_DETAILS_TP_ROUTING  Used with llGetParcelDetails to get the parcel teleport routing.
+PARCEL_FLAG_ALLOW_ALL_OBJECT_ENTRY  Used with llGetParcelFlags to find if a parcel allows all objects to enter
+PARCEL_FLAG_ALLOW_CREATE_GROUP_OBJECTS Used with llGetParcelFlags to find if a parcel allows group members or objects to create objects
+PARCEL_FLAG_ALLOW_CREATE_OBJECTS    Used with llGetParcelFlags to find if a parcel allows anyone to create objects
+PARCEL_FLAG_ALLOW_DAMAGE      Used with llGetParcelFlags to find if a parcel allows damage
+PARCEL_FLAG_ALLOW_FLY      Used with llGetParcelFlags to find if a parcel allows flying
+PARCEL_FLAG_ALLOW_GROUP_OBJECT_ENTRY   Used with llGetParcelFlags to find if a parcel only allows group (and owner) objects to enter
+PARCEL_FLAG_ALLOW_GROUP_SCRIPTS  Used with llGetParcelFlags to find if a parcel allows group scripts
+PARCEL_FLAG_ALLOW_LANDMARK    Used with llGetParcelFlags to find if a parcel allows landmarks to be created
+PARCEL_FLAG_ALLOW_SCRIPTS     Used with llGetParcelFlags to find if a parcel allows outside scripts
+PARCEL_FLAG_ALLOW_TERRAFORM   Used with llGetParcelFlags to find if a parcel allows anyone to terraform the land
+PARCEL_FLAG_LOCAL_SOUND_ONLY     Used with llGetParcelFlags to find if a parcel restricts spacialized sound to the parcel
+PARCEL_FLAG_RESTRICT_PUSHOBJECT  Used with llGetParcelFlags to find if a parcel restricts llPushObject() calls
+PARCEL_FLAG_USE_ACCESS_GROUP     Used with llGetParcelFlags to find if a parcel limits access to a group
+PARCEL_FLAG_USE_ACCESS_LIST   Used with llGetParcelFlags to find if a parcel limits access to a list of residents
+PARCEL_FLAG_USE_BAN_LIST      Used with llGetParcelFlags to find if a parcel uses a ban list
+PARCEL_FLAG_USE_LAND_PASS_LIST   Used with llGetParcelFlags to find if a parcel allows passes to be purchased
+PARCEL_MEDIA_COMMAND_AGENT    Allows media stream commands to apply to only one agent
+PARCEL_MEDIA_COMMAND_AUTO_ALIGN  Auto aligns the media stream to the texture size.  May cause a performance hit and loss of some visual quality
+PARCEL_MEDIA_COMMAND_DESC     Get or set the parcel's media description
+PARCEL_MEDIA_COMMAND_LOOP     Loop media stream
+PARCEL_MEDIA_COMMAND_LOOP_SET    Used to get or set the parcel's media loop duration.
+PARCEL_MEDIA_COMMAND_PAUSE    Pause media stream
+PARCEL_MEDIA_COMMAND_PLAY     Play media stream
+PARCEL_MEDIA_COMMAND_SIZE     Get or set the parcel's media pixel resolution
+PARCEL_MEDIA_COMMAND_STOP     Stop media stream
+PARCEL_MEDIA_COMMAND_TEXTURE     Get or set the parcel's media texture
+PARCEL_MEDIA_COMMAND_TIME     Set media stream to specific time
+PARCEL_MEDIA_COMMAND_TYPE     Get or set the parcel's media mimetype
+PARCEL_MEDIA_COMMAND_UNLOAD   Unloads the media stream
+PARCEL_MEDIA_COMMAND_URL      Get or set the parcel's media url
+PASS_ALWAYS    Always pass the event.
+PASS_IF_NOT_HANDLED  Pass the event if there is no script handling the event in the prim.
+PASS_NEVER    Never pass the event.
+PASSIVE     Passed in llSensor library function to look for objects that aren't moving
+PATROL_PAUSE_AT_WAYPOINTS  Used with llPatrolPoints(). Defines if characters slow down and momentarily pause at each waypoint.
+PAY_DEFAULT Used with llSetPayPrice to use the default price for a button
+PAY_HIDE    Used with llSetPayPrice to hide a button
+PAYMENT_INFO_ON_FILE     Used with llRequestAgentData to tell if Agent is of "Payment Info On File" status
+PAYMENT_INFO_USED  Used with llRequestAgentData to tell if Agent is of "Payment Info Used" status
+PERM_ALL    Move/Modify/Copy/Transfer permissions
+PERM_COPY   Copy permission
+PERM_MODIFY Modify permission
+PERM_MOVE   Move permission
+PERM_TRANSFER  Transfer permission
+PERMISSION_ATTACH    Passed to llRequestPermissions library function to request permission to attach/detach from agent
+PERMISSION_CHANGE_JOINTS   Passed to llRequestPermissions() to request permission to change joints (not implemented)
+PERMISSION_CHANGE_LINKS Passed to llRequestPermissions library function to request permission to change links
+PERMISSION_CHANGE_PERMISSIONS  Passed to llRequestPermissions() to request permission to change permissions (not implemented)
+PERMISSION_CONTROL_CAMERA Passed to llRequestPermissions library function to request permission to change agent's camera
+PERMISSION_DEBIT  Passed to llRequestPermissions library function to request permission to take L$ from agent's account
+PERMISSION_EXPERIENCE    Passed to llRequestPermissions() to request permission to join an experience
+PERMISSION_OVERRIDE_ANIMATIONS Passed to llRequestPermissions library function to request permission to override animations on agent
+PERMISSION_RELEASE_OWNERSHIP  Passed to llRequestPermissions() to request permission to release ownership (not implemented)
+PERMISSION_REMAP_CONTROLS   Passed to llRequestPermissions() to request permission to remap agent's controls (not implemented)
+PERMISSION_RETURN_OBJECTS Passed to llRequestPermissions library function to request permission to return objects
+PERMISSION_SILENT_ESTATE_MANAGEMENT Passed to llRequestPermissions() to request permission to silence notifications about estate access modifications
+PERMISSION_TAKE_CONTROLS Passed to llRequestPermissions library function to request permission to take agent's controls
+PERMISSION_TELEPORT  Passed to llRequestPermissions library function to request permission to teleport agent
+PERMISSION_TRACK_CAMERA Passed to llRequestPermissions library function to request permission to track agent's camera
+PERMISSION_TRIGGER_ANIMATION Passed to llRequestPermissions library function to request permission to trigger animation on agent
+PING_PONG    Animate forward, then reverse
+PRIM_ALLOW_UNSIT  Followed by integer flag
+PRIM_ALPHA_MODE      Used to specify how the alpha channel of the diffuse texture should affect rendering of a prim’s face.
+PRIM_ALPHA_MODE_BLEND      Render the diffuse texture with alpha-blending.
+PRIM_ALPHA_MODE_EMISSIVE      Render the prim face in emissivity mode.
+PRIM_ALPHA_MODE_MASK Render the prim face in alpha-masked mode.
+PRIM_ALPHA_MODE_NONE Render the diffuse texture as though the alpha channel were nonexistent.
+PRIM_BUMP_BARK Bark bump map
+PRIM_BUMP_BLOBS      Blob bump map
+PRIM_BUMP_BRICKS  Brick bump map
+PRIM_BUMP_BRIGHT  Generate bump map from highlights
+PRIM_BUMP_CHECKER Checker bump map
+PRIM_BUMP_CONCRETE      Concrete bump map
+PRIM_BUMP_DARK Generate bump map from lowlights
+PRIM_BUMP_DISKS      Disk bump map
+PRIM_BUMP_GRAVEL  Gravel bump map
+PRIM_BUMP_LARGETILE     Large tile bump map
+PRIM_BUMP_NONE No bump map
+PRIM_BUMP_SHINY Followed by an integer face, one of PRIM_SHINY_NONE, PRIM_SHINY_LOW,:PRIM_SHINY_MEDIUM, or PRIM_SHINY_HIGH,:and one of PRIM_BUMP_NONE, PRIM_BUMP_BRIGHT, PRIM_BUMP_DARK, etc
+PRIM_BUMP_SIDING  Siding bump map
+PRIM_BUMP_STONE      Stone bump map
+PRIM_BUMP_STUCCO  Stucco bump map
+PRIM_BUMP_SUCTION Suction cup bump map
+PRIM_BUMP_TILE Tile bump map
+PRIM_BUMP_WEAVE      Weave bump map
+PRIM_BUMP_WOOD Wood bump map
+PRIM_CAST_SHADOWS  DEPRECATED. Takes 1 parameter, an integer, but has no effect when set and always returns 0 if used in llGetPrimitiveParams
+PRIM_CLICK_ACTION  Followed by integer for the primitive click action.
+PRIM_COLOR   Followed by an integer face, vector color, and float alpha
+PRIM_DAMAGE    Followed by a float for the damage amount and by an integer for the damage type.
+PRIM_DESC    Sets the prim's description
+PRIM_FLEXIBLE   Followed by TRUE or FALSE, integer softness, float gravity, float friction, float wind, float tension, and vector force
+PRIM_FULLBRIGHT Followed by an integer face, and TRUE or FALSE
+PRIM_GLOW    Followed by an integer face, and a float from 0.0 to 1.0 specifying glow amount
+PRIM_GLTF_BASE_COLOR Followed by a string for the texture, two vectors for repeats and offsets, a float for rotation in radians, a vector for the color, a float for the alpha, and integer for the alpha mode, a float for the alpha mask cutoff, and an integer (boolean) for the double sided flag.
+PRIM_GLTF_EMISSIVE  Followed by a string for the texture, two vectors for repeats and offsets, a float for rotation in radians and a vector for the emissive color.
+PRIM_GLTF_METALLIC_ROUGHNESS Followed by a string for the texture, two vectors for repeats and offsets, a float for rotation in radians, and two floats for the metallic and roughness factors.
+PRIM_GLTF_NORMAL  Followed by a string for the texture, two vectors for repeats and offsets, and a float for rotation in radians.
+PRIM_HEALTH Sets the health of the object.
+PRIM_HOLE_CIRCLE      Sets hole type to circle
+PRIM_HOLE_DEFAULT  Sets hole type to match the prim type
+PRIM_HOLE_SQUARE      Sets hole type to square
+PRIM_HOLE_TRIANGLE Sets hole type to triangle
+PRIM_LINK_TARGET      Used to get or set multiple links with a single PrimParameters call. 
+PRIM_MATERIAL   Followed by PRIM_MATERIAL_STONE, PRIM_MATERIAL_METAL, PRIM_MATERIAL_GLASS, PRIM_MATERIAL_WOOD, PRIM_MATERIAL_FLESH, PRIM_MATERIAL_PLASTIC, or PRIM_MATERIAL_RUBBER
+PRIM_MATERIAL_FLESH      Sets material to flesh
+PRIM_MATERIAL_GLASS      Sets material to glass
+PRIM_MATERIAL_LIGHT      Sets material to light
+PRIM_MATERIAL_METAL      Sets material to metal
+PRIM_MATERIAL_PLASTIC Sets material to plastic
+PRIM_MATERIAL_RUBBER     Sets material to rubber
+PRIM_MATERIAL_STONE      Sets material to stone
+PRIM_MATERIAL_WOOD Sets material to wood
+PRIM_MEDIA_ALT_IMAGE_ENABLE   Used with ll{Get,Set}PrimMediaParams to enable the default alt image for media 
+PRIM_MEDIA_AUTO_LOOP Used with ll{Get,Set}PrimMediaParams to determine if media should auto-loop (if applicable)
+PRIM_MEDIA_AUTO_PLAY Used with ll{Get,Set}PrimMediaParams to determine if media should start playing as soon as it is created
+PRIM_MEDIA_AUTO_SCALE      Used with ll{Get,Set}PrimMediaParams to determine if media should scale to fit the face it is on 
+PRIM_MEDIA_AUTO_ZOOM Used with ll{Get,Set}PrimMediaParams to determine if the user would zoom in when viewing media
+PRIM_MEDIA_CONTROLS     Used with ll{Get,Set}PrimMediaParams to determine the controls shown for media
+PRIM_MEDIA_CONTROLS_MINI      Used with ll{Get,Set}PrimMediaParams, a PRIM_MEDIA_CONTROLS value meaning "mini controls"     
+PRIM_MEDIA_CONTROLS_STANDARD     Used with ll{Get,Set}PrimMediaParams, a PRIM_MEDIA_CONTROLS value meaning "standard controls"
+PRIM_MEDIA_CURRENT_URL     Used with ll{Get,Set}PrimMediaParams to navigate/access the current URL
+PRIM_MEDIA_FIRST_CLICK_INTERACT  Used with ll{Get,Set}PrimMediaParams to determine whether the user interacts with media or not when she first clicks it (versus selection)
+PRIM_MEDIA_HEIGHT_PIXELS      Used with ll{Get,Set}PrimMediaParams to access the media's height in pixels
+PRIM_MEDIA_HOME_URL     Used with ll{Get,Set}PrimMediaParams to access the home URL
+PRIM_MEDIA_MAX_HEIGHT_PIXELS     Used with ll{Get,Set}PrimMediaParams, the maximum width allowed in PRIM_MEDIA_HEIGHT_PIXELS
+PRIM_MEDIA_MAX_URL_LENGTH     Used with ll{Get,Set}PrimMediaParams, the maximum length of PRIM_MEDIA_CURRENT_URL or PRIM_MEDIA_HOME_URL
+PRIM_MEDIA_MAX_WHITELIST_COUNT   Used with ll{Get,Set}PrimMediaParams, the maximum number of items allowed in PRIM_MEDIA_WHITELIST
+PRIM_MEDIA_MAX_WHITELIST_SIZE    Used with ll{Get,Set}PrimMediaParams, the maximum length, in bytes, of PRIM_MEDIA_WHITELIST
+PRIM_MEDIA_MAX_WIDTH_PIXELS   Used with ll{Get,Set}PrimMediaParams, the maximum width allowed in PRIM_MEDIA_WIDTH_PIXELS
+PRIM_MEDIA_PARAM_MAX The value of the largest media param
+PRIM_MEDIA_PERM_ANYONE     Used with ll{Get,Set}PrimMediaParams, a PRIM_MEDIA_PERMS_INTERACT or PRIM_MEDIA_PERMS_CONTROL bit, anyone has permissions
+PRIM_MEDIA_PERM_GROUP      Used with ll{Get,Set}PrimMediaParams, a PRIM_MEDIA_PERMS_INTERACT or PRIM_MEDIA_PERMS_CONTROL bit, group permissions
+PRIM_MEDIA_PERM_NONE Used with ll{Get,Set}PrimMediaParams, a PRIM_MEDIA_PERMS_INTERACT or PRIM_MEDIA_PERMS_CONTROL bit, no permissions
+PRIM_MEDIA_PERM_OWNER      Used with ll{Get,Set}PrimMediaParams, a PRIM_MEDIA_PERMS_INTERACT or PRIM_MEDIA_PERMS_CONTROL bit, owner permissions
+PRIM_MEDIA_PERMS_CONTROL      Used with ll{Get,Set}PrimMediaParams to determine the permissions for who has controls
+PRIM_MEDIA_PERMS_INTERACT     Used with ll{Get,Set}PrimMediaParams to determine the permissions for who can interact with the media
+PRIM_MEDIA_WHITELIST Used with ll{Get,Set}PrimMediaParams to access the media's list of allowable URL prefixes to navigate to
+PRIM_MEDIA_WHITELIST_ENABLE   Used with ll{Get,Set}PrimMediaParams to determine if the domain whitelist is enabled
+PRIM_MEDIA_WIDTH_PIXELS    Used with ll{Get,Set}PrimMediaParams to access the media's width in pixels
+PRIM_NAME    Sets the prim's name
+PRIM_NORMAL Used to get or set the normal map texture settings of a prim's face.
+PRIM_OMEGA   Makes the object spin at the specified axis and rate
+PRIM_PHANTOM Sets phantom to TRUE or FALSE
+PRIM_PHYSICS Sets physics to TRUE or FALSE
+PRIM_PHYSICS_SHAPE_CONVEX     Ignore this prim in the physics shape. This cannot be applied to the root prim.
+PRIM_PHYSICS_SHAPE_NONE    Use the convex hull of the prim shape for physics (this is the default for mesh objects)
+PRIM_PHYSICS_SHAPE_PRIM    Use the normal prim shape for physics (this is the default for all non-mesh objects)
+PRIM_PHYSICS_SHAPE_TYPE    For primitive physics shape type. Followed with either PRIM_PHYSICS_SHAPE_PRIM, PRIM_PHYSICS_SHAPE_NONE or PRIM_PHYSICS_SHAPE_CONVEX.
+PRIM_POINT_LIGHT      Followed by TRUE or FALSE, vector color, float intensity, float radius, float falloff
+PRIM_POS_LOCAL  Sets the prim's local position
+PRIM_POSITION   Sets primitive position to a vector position
+PRIM_PROJECTOR   Followed by integer projection, key texture, float fov, float focus, float ambient
+PRIM_REFLECTION_PROBE Followed by a boolean (TRUE when enabled), a float for the ambiance, another float for the clip distance, and an integer for flags (PRIM_REFLECTION_PROBE_BOX, PRIM_REFLECTION_PROBE_DYNAMIC).
+PRIM_REFLECTION_PROBE_BOX  For use as a flag with PRIM_REFLECTION_PROBE in primitive params.
+PRIM_REFLECTION_PROBE_DYNAMIC  For use as a flag with PRIM_REFLECTION_PROBE in primitive params.
+PRIM_REFLECTION_PROBE_MIRROR  For use as a flag with PRIM_REFLECTION_PROBE in primitive params.
+PRIM_RENDER_MATERIAL Followed by string for the material name.
+PRIM_ROT_LOCAL  Sets the prim's local rotation
+PRIM_ROTATION   Sets primitive rotation
+PRIM_SCRIPTED_SIT_ONLY Followed by integer flag
+PRIM_SCULPT_FLAG_INVERT    Flag to specify that the surface normals should be inverted
+PRIM_SCULPT_FLAG_MIRROR    Flag to specify that the prim should be reflected along X axis
+PRIM_SCULPT_TYPE_CYLINDER     Stitch edges in a cylinder-like way
+PRIM_SCULPT_TYPE_MASK      Mask used to determine stitching type
+PRIM_SCULPT_TYPE_PLANE     Do not stitch edges
+PRIM_SCULPT_TYPE_SPHERE    Stitch edges in a sphere-like way
+PRIM_SCULPT_TYPE_TORUS     Stitch edges in a torus-like way
+PRIM_SHINY_HIGH High shininess
+PRIM_SHINY_LOW  Low shininess
+PRIM_SHINY_MEDIUM  Medium shininess
+PRIM_SHINY_NONE No shininess
+PRIM_SIT_TARGET   Followed by integer flag, vector offset, rotation rot
+PRIM_SIZE    Sets primitive size to a vector size
+PRIM_SLICE   Get and set the 'slice' parameter of all shapes. Takes a vector parameter of the form <start_slice, end_slice, 0>
+PRIM_SPECULAR  Used to get or set the specular map texture settings of a prim's face.
+PRIM_TEMP_ON_REZ      Sets temporary on rez to TRUE or FALSE
+PRIM_TEXGEN  Followed by an integer face, and one of PRIM_TEXGEN_DEFAULT or PRIM_TEXGEN_PLANAR
+PRIM_TEXGEN_DEFAULT     Default texture mapping
+PRIM_TEXGEN_PLANAR      Planar texture mapping
+PRIM_TEXT    Used to get or set the object's floating text. 
+PRIM_TEXTURE Followed by an integer face, key id, vector repeats, vector offsets,:and float rotation in radians
+PRIM_TYPE    Followed by PRIM_TYPE_BOX, PRIM_TYPE_CYLINDER, PRIM_TYPE_PRISM, PRIM_TYPE_SPHERE, PRIM_TYPE_TORUS, PRIM_TYPE_TUBE, or PRIM_TYPE_SCULPT and their arguments
+PRIM_TYPE_BOX   Followed by integer hole shape, vector cut, float hollow, vector twist,:vector top size, and vector top shear
+PRIM_TYPE_CYLINDER Followed by integer hole shape, vector cut, float hollow, vector twist,:vector top size, and vector top shear
+PRIM_TYPE_PRISM Followed by integer hole shape, vector cut, float hollow, vector twist,:vector top size, and vector top shear
+PRIM_TYPE_RING  Followed by integer hole shape, vector cut, float hollow, vector twist,:vector hole size, vector top shear, vector advanced cut, vector taper,:float revolutions, float radius offset, and float skew
+PRIM_TYPE_SCULPT      Followed by a key/string texture uuid, and one of PRIM_SCULPT_TYPE_SPHERE, PRIM_SCULPT_TYPE_TORUS, PRIM_SCULPT_TYPE_PLANE, or PRIM_SCULPT_TYPE_CYLINDER
+PRIM_TYPE_SPHERE      Followed by integer hole shape, vector cut, float hollow, vector twist,:and vector dimple
+PRIM_TYPE_TORUS Followed by integer hole shape, vector cut, float hollow, vector twist,:vector hole size, vector top shear, vector advanced cut, vector taper,:float revolutions, float radius offset, and float skew
+PRIM_TYPE_TUBE  Followed by integer hole shape, vector cut, float hollow, vector twist,:vector hole size, vector top shear, vector advanced cut, vector taper,:float revolutions, float radius offset, and float skew
+PROFILE_NONE      Disables profiling
+PROFILE_SCRIPT_MEMORY   Enables memory profiling
+PROFILE_SCRIPT_NONE  Disables memory profiling when passed to llScriptProfiler()
+PSYS_PART_BF_DEST_COLOR
+PSYS_PART_BF_ONE
+PSYS_PART_BF_ONE_MINUS_DEST_COLOR
+PSYS_PART_BF_ONE_MINUS_SOURCE_ALPHA
+PSYS_PART_BF_ONE_MINUS_SOURCE_COLOR
+PSYS_PART_BF_SOURCE_ALPHA
+PSYS_PART_BF_SOURCE_COLOR
+PSYS_PART_BF_ZERO
+PSYS_PART_BLEND_FUNC_DEST
+PSYS_PART_BLEND_FUNC_SOURCE
+PSYS_PART_BOUNCE_MASK
+PSYS_PART_EMISSIVE_MASK
+PSYS_PART_END_ALPHA
+PSYS_PART_END_COLOR
+PSYS_PART_END_GLOW
+PSYS_PART_END_SCALE
+PSYS_PART_FLAGS
+PSYS_PART_FOLLOW_SRC_MASK
+PSYS_PART_FOLLOW_VELOCITY_MASK
+PSYS_PART_INTERP_COLOR_MASK
+PSYS_PART_INTERP_SCALE_MASK
+PSYS_PART_MAX_AGE
+PSYS_PART_RIBBON_MASK
+PSYS_PART_START_ALPHA
+PSYS_PART_START_COLOR
+PSYS_PART_START_GLOW
+PSYS_PART_START_SCALE
+PSYS_PART_TARGET_LINEAR_MASK
+PSYS_PART_TARGET_POS_MASK
+PSYS_PART_WIND_MASK
+PSYS_SRC_ACCEL
+PSYS_SRC_ANGLE_BEGIN
+PSYS_SRC_ANGLE_END
+PSYS_SRC_BURST_PART_COUNT
+PSYS_SRC_BURST_RADIUS
+PSYS_SRC_BURST_RATE
+PSYS_SRC_BURST_SPEED_MAX
+PSYS_SRC_BURST_SPEED_MIN
+PSYS_SRC_INNERANGLE  Deprecated -- Use PSYS_SRC_ANGLE_BEGIN
+PSYS_SRC_MAX_AGE
+PSYS_SRC_OMEGA
+PSYS_SRC_OUTERANGLE  Deprecated -- Use PSYS_SRC_ANGLE_END
+PSYS_SRC_PATTERN
+PSYS_SRC_PATTERN_ANGLE
+PSYS_SRC_PATTERN_ANGLE_CONE
+PSYS_SRC_PATTERN_ANGLE_CONE_EMPTY
+PSYS_SRC_PATTERN_DROP
+PSYS_SRC_PATTERN_EXPLODE
+PSYS_SRC_TARGET_KEY
+PSYS_SRC_TEXTURE
+PU_EVADE_HIDDEN      Triggered when an llEvade character thinks it has hidden from its pursuer.
+PU_EVADE_SPOTTED     Triggered when an llEvade character switches from hiding to running
+PU_FAILURE_DYNAMIC_PATHFINDING_DISABLED Triggered when a character enters a region with dynamic pathfinding disabled.
+PU_FAILURE_INVALID_GOAL    Goal is not on the navigation-mesh and cannot be reached.
+PU_FAILURE_INVALID_START   Character cannot navigate from the current location - e.g., the character is off the navmesh or too high above it.
+PU_FAILURE_NO_NAVMESH   Triggered if no navmesh is available for the region.
+PU_FAILURE_NO_VALID_DESTINATION  There's no good place for the character to go - e.g., it is patrolling and all the patrol points are now unreachable.
+PU_FAILURE_OTHER     Unknown failure
+PU_FAILURE_PARCEL_UNREACHABLE Triggered when a character failed to enter a parcel because it is not allowed to enter, e.g. because the parcel is already full or because object entry was disabled after the navmesh was baked.
+PU_FAILURE_TARGET_GONE     Target (for llPursue or llEvade) can no longer be tracked - e.g., it left the region or is an avatar that is now more than about 30m outside the region.
+PU_FAILURE_UNREACHABLE     Goal is no longer reachable for some reason - e.g., an obstacle blocks the path.
+PU_GOAL_REACHED      Character has reached the goal and will stop or choose a new goal (if wandering).
+PU_SLOWDOWN_DISTANCE_REACHED  Character is near current goal.
+PUBLIC_CHANNEL    Chat channel that broadcasts to all nearby users
+PURSUIT_FUZZ_FACTOR Used with llPursue(). Selects a random destination near the PURSUIT_OFFSET. The valid fuzz factor range is from 0 to 1, where 1 is most random. This option requires a nonzero PURSUIT_OFFSET.
+PURSUIT_GOAL_TOLERANCE    Used with llPursue(). Defines approximately how close the character must be to the current goal to consider itself to be at the desired position. The valid range is from 0.25 to 10m. 
+PURSUIT_INTERCEPT      Used with llPursue(). Define whether the character attempts to predict the target's future location.
+PURSUIT_OFFSET      Used with llPursue(). Go to a position offset from the target.
+RC_DATA_FLAGS  Option for llCastRay() followed with a bitwise combination of RC_GET_NORMAL, RC_GET_ROOT_KEY and RC_GET_LINK_NUM.
+RC_DETECT_PHANTOM Option for llCastRay() followed with TRUE to detect phantom AND volume detect objects, FASLE otherwise.
+RC_GET_LINK_NUM      Flag used in the RC_DATA_FLAGS mask to get link numbers in llCastRay() results.
+RC_GET_NORMAL  Flag used in the RC_DATA_FLAGS mask to get hit normals in llCastRay() results.
+RC_GET_ROOT_KEY      Flag used in the RC_DATA_FLAGS mask to get root keys in llCastRay() results.
+RC_MAX_HITS Option for llCastRay() followed with an integer specifying the maximum number of hits to return (must be <= 256).
+RC_REJECT_AGENTS Flag used in the RC_REJECT_TYPES mask to reject agents in llCastRay().
+RC_REJECT_LAND      Flag used in the RC_REJECT_TYPES mask to reject land in llCastRay().
+RC_REJECT_NONPHYSICAL     Flag used in the RC_REJECT_TYPES mask to reject non-physical objects in llCastRay().
+RC_REJECT_PHYSICAL     Flag used in the RC_REJECT_TYPES mask to reject physical objects in llCastRay().
+RC_REJECT_TYPES      Option for llCastRay() used to ignore specific types of objects, followed with a bitwise combination of RC_REJECT_AGENTS, RC_REJECT_PHYSICAL, RC_REJECT_NONPHYSICAL and RC_REJECT_LAND.
+RCERR_CAST_TIME_EXCEEDED     Returned by llCastRay() when the raycast failed because the parcel or agent has exceeded the maximum time allowed for raycasting.
+RCERR_SIM_PERF_LOW     Returned by llCastRay() when the raycast failed because simulator performance is low.
+RCERR_UNKNOWN Returned by llCastRay() when the raycast failed for an unspecified reason.
+REGION_FLAG_ALLOW_DAMAGE      Used with llGetRegionFlags to find if a region is entirely damage enabled
+REGION_FLAG_ALLOW_DIRECT_TELEPORT   Used with llGetRegionFlags to find if a region allows direct teleports
+REGION_FLAG_BLOCK_FLY      Used with llGetRegionFlags to find if a region blocks flying
+REGION_FLAG_BLOCK_FLYOVER   Used with llGetRegionFlags to find if a region enforces higher altitude parcel access rules
+REGION_FLAG_BLOCK_TERRAFORM   Used with llGetRegionFlags to find if a region terraforming disabled
+REGION_FLAG_DISABLE_COLLISIONS   Used with llGetRegionFlags to find if a region has disabled collisions
+REGION_FLAG_DISABLE_PHYSICS   Used with llGetRegionFlags to find if a region has disabled physics
+REGION_FLAG_FIXED_SUN      Used with llGetRegionFlags to find if a region has a fixed sun position
+REGION_FLAG_RESTRICT_PUSHOBJECT  Used with llGetRegionFlags to find if a region restricts llPushObject() calls
+REGION_FLAG_SANDBOX     Used with llGetRegionFlags to find if a region is a sandbox
+REGION_FLAGS_BLOCK_FLYOVER   Used with llGetRegionFlags to find if a region blocks flying over a parcel
+REMOTE_DATA_CHANNEL      Value of event_type in remote_event after successful llOpenRemoteDataChannel
+REMOTE_DATA_REPLY  Value of event_type in remote_event if XML-RPC reply is received
+REMOTE_DATA_REQUEST      Value of event_type in remote_event if XML-RPC request is received
+REQUIRE_LINE_OF_SIGHT     Used with llPursue(). Define whether the character needs a physical line-of-sight to give chase. When enabled, the character will not pick a new target position while there is a something solid between the character and the target object/agent.
+RESTITUTION   For use with llSetPhysicsMaterial() as a bitwise value in its material_bits parameter, to set the restitution.
+REVERSE   Animate in the reverse direction
+REZ_ACCEL      A constant force to apply to the object. If local is TRUE, the force vector is in local coordinates.
+REZ_DAMAGE  The amount of damage applied to an agent upon collision with this object.
+REZ_DAMAGE_TYPE      The damage type to apply when this prim collides with another object. Can match one of the DAMAGE_TYPE_* constants, be a custom damage type or repurpose the damage field.
+REZ_FLAG_BLOCK_GRAB_OBJECT    Grabbing is disabled for this object.
+REZ_FLAG_DIE_ON_COLLIDE    The object will die after its first collision.
+REZ_FLAG_DIE_ON_NOENTRY    Object will die if it attempts to enter a parcel that it can't.
+REZ_FLAG_NO_COLLIDE_FAMILY    Object will not trigger collision events when colliding with other object rezzed by the same rezzer.
+REZ_FLAG_NO_COLLIDE_OWNER  Object will not trigger a collision event if colliding with its owner.†
+REZ_FLAG_PHANTOM     Object is rezzed as phantom
+REZ_FLAG_PHYSICAL    Object is rezzed as physical.
+REZ_FLAG_TEMP     Object is rezzed as temporary.
+REZ_FLAGS      Flags applied to rezzed object when it is created in the world.
+REZ_LOCK_AXES     Prevent the object from spinning on certain axes.
+REZ_OMEGA      Spin the object around the specified axis. If local is TRUE that axis is in local coordinates, otherwise they are global.
+REZ_PARAM      Start parameter passed into the rezzed object's on_rez(integer) event.
+REZ_PARAM_STRING     Pass an initialization string to the newly rezzed object that may be read with llGetStartString from within the rezzed object.
+REZ_POS  Position to rez the new object in the world. If relative is FALSE the position is in region coordinates. If relative is TRUE, the position will be relative to the rezzing object.
+REZ_ROT  The initial rotation to apply to the object. If relative is TRUE, the rotation is relative to the rezzing object, otherwise it is absolute.
+REZ_SOUND      A sound to attach to this object. It will be played at the specified volume.
+REZ_SOUND_COLLIDE    A sound to play upon collision with another object, the ground or an avatar.
+REZ_VEL  The initial velocity to apply to the object. If local is TRUE the velocity is in the local object coordinate frame, otherwise it is in world coordinates.
+ROTATE    Rotates the texture, instead of using frames
+SCALE     Scales the texture, instead of using frames
+SCRIPT_PERMISSION_SILENT_ESTATE_MANAGEMENT Passed to llRequestPermissions library function to request permission to silently modify estate access lists
+SCRIPTED    Passed in llSensor library function to look for scripted objects
+SIM_STAT_ACTIVE_SCRIPT_COUNT For use with llGetSimStats(). Returns the number of active scripts in region.
+SIM_STAT_AGENT_COUNT   For use with llGetSimStats(). Returns the number of agents in region.
+SIM_STAT_AGENT_MS    For use with llGetSimStats(). Returns the time spent in "agent" segment of simulation frame.
+SIM_STAT_AGENT_UPDATES   For use with llGetSimStats(). Returns the agent updates per second.
+SIM_STAT_AI_MS     For use with llGetSimStats(). Returns the time spent on AI step.
+SIM_STAT_ASSET_DOWNLOADS  For use with llGetSimStats(). Returns the pending asset download count.
+SIM_STAT_ASSET_UPLOADS   For use with llGetSimStats(). Returns the pending asset upload count.
+SIM_STAT_CHILD_AGENT_COUNT  For use with llGetSimStats(). Returns the number of child (neighboring) agents in region.
+SIM_STAT_FRAME_MS    For use with llGetSimStats(). Returns the total frame time.
+SIM_STAT_IMAGE_MS    For use with llGetSimStats(). Returns the time spent in "image" segment of simulation frame.
+SIM_STAT_IO_PUMP_MS    For use with llGetSimStats(). Returns the PumpIO time.
+SIM_STAT_NET_MS     For use with llGetSimStats(). Returns the time spent in "network" segment of simulation frame.
+SIM_STAT_OTHER_MS    For use with llGetSimStats(). Returns the main simulation segment of frame, encapsulating task, script and misc. updates.
+SIM_STAT_PACKETS_IN    For use with llGetSimStats(). Returns the average packets in per second.
+SIM_STAT_PACKETS_OUT   For use with llGetSimStats(). Returns the average packets out per second.
+SIM_STAT_PCT_CHARS_STEPPED   Option for llGetSimStats() to return the % of pathfinding characters skipped each frame, averaged over the last minute.
+SIM_STAT_PHYSICS_FPS   For use with llGetSimStats(). Returns the physics simulation FPS.
+SIM_STAT_PHYSICS_MS    For use with llGetSimStats(). Returns the time spent in "physics" segment of simulation frame.
+SIM_STAT_PHYSICS_OTHER_MS  For use with llGetSimStats(). Returns the average physics "other" segment update time.
+SIM_STAT_PHYSICS_SHAPE_MS  For use with llGetSimStats(). Returns the average physics "shape" segment update time.
+SIM_STAT_PHYSICS_STEP_MS  For use with llGetSimStats(). Returns the average physics step time.
+SIM_STAT_SCRIPT_EPS    For use with llGetSimStats(). Returns the script events per second.
+SIM_STAT_SCRIPT_MS    For use with llGetSimStats(). Returns the time spent in "script" segment of simulation frame.
+SIM_STAT_SCRIPT_RUN_PCT   For use with llGetSimStats(). Returns the percent of scripts run during frame.
+SIM_STAT_SLEEP_MS    For use with llGetSimStats(). Returns the time spent sleeping.
+SIM_STAT_SPARE_MS    For use with llGetSimStats(). Returns the spare time left after frame.
+SIM_STAT_UNACKED_BYTES   For use with llGetSimStats(). Returns the total unacknowledged bytes.
+SIT_FLAG_ALLOW_UNSIT Used with ll{Get,Set}LinkSitFlags() to determine if an avatar is allowed to manually unsit from a sit target.
+SIT_FLAG_NO_COLLIDE  Used with ll{Get,Set}LinkSitFlags() to determine if avatar's collision volume is disabled on this sit target.
+SIT_FLAG_NO_DAMAGE  Used with ll{Get,Set}LinkSitFlags() to determine if agents sitting on this sit target get distributed damages.
+SIT_FLAG_SCRIPTED_ONLY Used with ll{Get,Set}LinkSitFlags() to determine if only scripted sits are allowed on this target.
+SIT_FLAG_SIT_TARGET  Used with llGetLinkSitFlags() is a read-only flag indicating whether the link has a sit target.
+SIT_INVALID_AGENT    Returned by llSitOnLink() if unable to find specified agent
+SIT_INVALID_LINK    Returned by llSitOnLink() if unable to find specified link or the link constant would return multiple prims
+SIT_INVALID_OBJECT    Returned by llSitOnLink() if trying to force the user to sit on something that cannot be sat upon (such as an attachment)
+SIT_NO_ACCESS      Returned by llSitOnLink() if the avatar does not have access to the parcel that the prim running this script is located in
+SIT_NO_EXPERIENCE_PERMISSION Returned by llSitOnLink() if the agent has not granted permission
+SIT_NO_SIT_TARGET    Returned by llSitOnLink() if unable to find an open sit target
+SIT_NOT_EXPERIENCE    Returned by llSitOnLink() if the script is not running as part of an experience with a valid experience key
+SKY_AMBIENT      Returned by llGetEnvironment(), followed with a vector for the ambient color of the environment.
+SKY_CLOUD_TEXTURE    For use with llSetAgentEnvironment(), followed with a string containing the UUID of the texture.
+SKY_CLOUDS      Returned by llGetEnvironment(), followed with vector color, floats coverage, scale and variance, vectors scroll, density and detail, integer is_default.
+SKY_DOME      Returned by llGetEnvironment() or to use with llSetAgentEnvironment(), followed with 3 floats for offset, radius and max_altitude.
+SKY_GAMMA      Returned by llGetEnvironment() or to use with llSetAgentEnvironment(), followed with a float for the gamma value.
+SKY_GLOW      Returned by llGetEnvironment() or to use with llSetAgentEnvironment(), followed with 2 floats for glow_size and glow_focus.
+SKY_LIGHT      Returned by llGetEnvironment(), followed with two vectors for light_direction and total_ambient.
+SKY_MOON      Returned by llGetEnvironment() or to use with llSetAgentEnvironment(), followed with rotation rot, floats scale and brightness, integer is_default_texture, vectors direction, ambient_color and diffuse_color.
+SKY_MOON_TEXTURE    For use with llSetAgentEnvironment(), followed with a string containing the UUID of the texture.
+SKY_PLANET      Returned by llGetEnvironment() or to use with llSetAgentEnvironment(), followed with floats planet_radius, sky_bottom_radius and sky_top_radius.
+SKY_REFLECTION_PROBE_AMBIANCE Returned by llGetEnvironment(), followed with one float for ambiance.
+SKY_REFRACTION     Returned by llGetEnvironment() or to use with llSetAgentEnvironment(), followed with floats moisture_level, droplet_radius and ice_level.
+SKY_STAR_BRIGHTNESS    Returned by llGetEnvironment() or to use with llSetAgentEnvironment(), followed with a float for the brightness.
+SKY_SUN       Returned by llGetEnvironment() or to use with llSetAgentEnvironment(), followed with rotation rot, float scale, vector sun_color, integer is_default_texture, vectors direction, ambient_color and diffuse_color.
+SKY_SUN_TEXTURE     For use with llSetAgentEnvironment(), followed with a string containing the UUID of the texture.
+SKY_TEXTURE_DEFAULTS   Returned by llGetEnvironment(), followed with 3 booleans (integers) for bloom_is_default, halo_is_default and rainbow_is_default.
+SKY_TRACKS      Returned by llGetEnvironment(), followed with 3 floats for the altitudes of sky transitions in the region.
+SMOOTH    Textures slides, instead of stepping
+SOUND_LOOP  Used with llLinkPlaySound to play the sound in an infinite loop, attached to the linked primitive.
+SOUND_PLAY  Used with llLinkPlaySound to play the sound once, attached to the linked primitive.
+SOUND_PLAY  Used with llLinkPlaySound to trigger the sound once, not attached to the linked primitive. When this flag is set, it overrides all other SOUND_* flags.
+SOUND_SYNC  Used with llLinkPlaySound to synchronize sound playback with the nearest sound master (c.f. llLoopSoundMaster).
+START_TIME_REVERSAL    start_time_reversal.
+START_TIME_REVERSAL_SAVING   start_time_reversal_saving.
+STATS_ACTIVE_PRIMS    returned value from osGetRegionStats(), 8th of 21 items in returned list.
+STATS_ACTIVE_SCRIPTS  returned value from osGetRegionStats(), 20th of 21 items in returned list.
+STATS_AGENT_MS     returned value from osGetRegionStats(), 17th of 21 items in returned list.
+STATS_AGENT_UPDATES   returned value from osGetRegionStats(), 4th of 21 items in returned list.
+STATS_CHILD_AGENTS    returned value from osGetRegionStats(), 6th of 21 items in returned list.
+STATS_FRAME_MS     returned value from osGetRegionStats(), 9th of 21 items in returned list.
+STATS_IMAGE_MS     returned value from osGetRegionStats(), 12th of 21 items in returned list.
+STATS_IN_PACKETS_PER_SECOND   returned value from osGetRegionStats(), 14th of 21 items in returned list.
+STATS_NET_MS     returned value from osGetRegionStats(), 10th of 21 items in returned list.
+STATS_OTHER_MS     returned value from osGetRegionStats(), 13th of 21 items in returned list.
+STATS_OUT_PACKETS_PER_SECOND  returned value from osGetRegionStats(), 15th of 21 items in returned list.
+STATS_PENDING_DOWNLOADS  returned value from osGetRegionStats(), 18th of 21 items in returned list.
+STATS_PENDING_UPLOADS  returned value from osGetRegionStats(), 19th of 21 items in returned list.
+STATS_PHYSICS_FPS  returned value from osGetRegionStats(), 3rd of 21 items in returned list.
+STATS_PHYSICS_MS   returned value from osGetRegionStats(), 11th of 21 items in returned list.
+STATS_ROOT_AGENTS  returned value from osGetRegionStats(), 5th of 21 items in returned list.
+STATS_SCRIPT_LPS   returned value from osGetRegionStats(), 21st of 21 items in returned list.
+STATS_SIM_FPS   returned value from osGetRegionStats(), 2nd of 21 items in returned list.
+STATS_TIME_DILATION   returned value from osGetRegionStats(), 1st of 21 items in returned list.
+STATS_TOTAL_PRIMS  returned value from osGetRegionStats(), 7th of 21 items in returned list.
+STATS_UNACKED_BYTES   returned value from osGetRegionStats(), 16th of 21 items in returned list.
+STATUS_BLOCK_GRAB Passed in the llSetStatus library function.  If TRUE, root prim of linkset (or unlinked prim) can't be grabbed and physically dragged
+STATUS_BLOCK_GRAB_OBJECT Passed in the llSetStatus library function.  If TRUE, no prims in linkset can be grabbed or physically dragged
+STATUS_BOUNDS_ERROR     Argument(s) passed to function had a bounds error 
+STATUS_CAST_SHADOWS  Passed in the llSetStatus library function.  If TRUE, object casts shadows on other objects
+STATUS_DIE_AT_EDGE   Passed in the llSetStatus library function.  If TRUE, objects that reach the edge of the world just die:rather than teleporting back to the owner
+STATUS_DIE_AT_NO_ENTRY Passed in the llSetStatus library function. If TRUE, delete and do not return the object if it cannot enter a parcel 
+STATUS_INTERNAL_ERROR      An internal error occurred
+STATUS_MALFORMED_PARAMS    Function was called with malformed params
+STATUS_NOT_FOUND  Object or other item was not found
+STATUS_NOT_SUPPORTED Feature not supported
+STATUS_OK   Result of function call was success
+STATUS_PHANTOM    Passed in the llSetStatus library function.  If TRUE, object doesn't collide with other objects
+STATUS_PHYSICS    Passed in the llSetStatus library function.  If TRUE, object moves physically
+STATUS_RETURN_AT_EDGE   Passed in the llSetStatus library function.  If TRUE, script rezzed objects that reach the edge of the world:are returned rather than killed:STATUS_RETURN_AT_EDGE trumps STATUS_DIE_AT_EDGE if both are set
+STATUS_ROTATE_X   Passed in the llSetStatus library function.  If FALSE, object doesn't rotate around local X axis
+STATUS_ROTATE_Y   Passed in the llSetStatus library function.  If FALSE, object doesn't rotate around local Y axis
+STATUS_ROTATE_Z   Passed in the llSetStatus library function.  If FALSE, object doesn't rotate around local Z axis
+STATUS_SANDBOX    Passed in the llSetStatus library function.  If TRUE, object can't cross region boundaries or move more than 10 meters from its start location
+STATUS_TYPE_MISMATCH Argument(s) passed to function had a type mismatch
+STATUS_WHITELIST_FAILED    URL failed to pass whitelist
+STOP_TIME_REVERSAL     stop_time_reversal.
+STOP_TIME_REVERSAL_SAVING    stop_time_reversal_saving.
+STRING_TRIM Used with llStringTrim to trim both leading and trailing spaces from a string
+STRING_TRIM_HEAD  Used with llStringTrim to trim leading spaces from a string
+STRING_TRIM_TAIL  Used with llStringTrim to trim trailing spaces from a string
+TARGETED_EMAIL_OBJECT_OWNER For use with llTargetedEmail() to send email to the owner of the current object.
+TARGETED_EMAIL_ROOT_CREATOR Deprecated do not use.
+TEXTURE_BLANK UUID for the "Blank" texture
+TEXTURE_DEFAULT     Alias for TEXTURE_PLYWOOD
+TEXTURE_MEDIA UUID for the "Default Media" texture
+TEXTURE_PLYWOOD     UUID for the default "Plywood" texture
+TEXTURE_TRANSPARENT    UUID for the "White - Transparent" texture
+TOUCH_INVALID_FACE   Value returned by llDetectedTouchFace() when the touch position is not valid
+TOUCH_INVALID_TEXCOORD  Value returned by llDetectedTouchUV() and llDetectedTouchST() when the touch position is not valid
+TOUCH_INVALID_VECTOR Value returned by llDetectedTouchPos(), llDetectedTouchNormal(), and llDetectedTouchBinormal() when the touch position is not valid
+TRAVERSAL_TYPE Controls the speed at which characters moves on terrain that is less than 100% walkable will move faster (e.g., a cat crossing a street) or slower (e.g., a car driving in a swamp).
+TRAVERSAL_TYPE_FAST     TODO: add documentation
+TRAVERSAL_TYPE_NONE     TODO: add documentation
+TRAVERSAL_TYPE_SLOW     TODO: add documentation
+TRUE     Integer constant for Boolean operations
+TYPE_FLOAT   Indicates that the list entry is holding an float
+TYPE_INTEGER Indicates that the list entry is holding an integer
+TYPE_INVALID Indicates that this wasn't a valid list entry
+TYPE_KEY  Indicates that the list entry is holding an key
+TYPE_ROTATION   Indicates that the list entry is holding an rotation
+TYPE_STRING  Indicates that the list entry is holding an string
+TYPE_VECTOR  Indicates that the list entry is holding an vector
+URL_REQUEST_DENIED     Used with http_request when a public URL is not available
+URL_REQUEST_GRANTED    Used with http_request when a public URL is successfully granted
+VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY   A slider between 0 (no deflection) and 1 (maximum strength)
+VEHICLE_ANGULAR_DEFLECTION_TIMESCALE The exponential timescale for the vehicle to achieve full angular deflection
+VEHICLE_ANGULAR_FRICTION_TIMESCALE   A vector of timescales for exponential decay of angular velocity about the three vehicle axes
+VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE   The exponential timescale for the angular motor's effectiveness to decay toward zero
+VEHICLE_ANGULAR_MOTOR_DIRECTION   The angular velocity that the vehicle will try to achieve
+VEHICLE_ANGULAR_MOTOR_TIMESCALE   The exponential timescale for the vehicle to achive its full angular motor velocity
+VEHICLE_BANKING_EFFICIENCY     A slider between -1 (leans out of turns), 0 (no banking), and +1 (leans into turns)
+VEHICLE_BANKING_MIX      A slider between 0 (static banking) and 1 (dynamic banking)
+VEHICLE_BANKING_TIMESCALE      The exponential timescale for the banking behavior to take full effect
+VEHICLE_BUOYANCY      A slider between 0 (no anti-gravity) and 1 (full anti-gravity)
+VEHICLE_FLAG_CAMERA_DECOUPLED     Causes the camera look-at axis to NOT move when the vehicle rotates
+VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT  Hover only pays attention to global height
+VEHICLE_FLAG_HOVER_TERRAIN_ONLY   Hover only pays attention to terrain height
+VEHICLE_FLAG_HOVER_UP_ONLY     Hover only pushes up
+VEHICLE_FLAG_HOVER_WATER_ONLY     Hover only pays attention to water level
+VEHICLE_FLAG_LIMIT_MOTOR_UP    Prevents ground vehicles from motoring into the sky
+VEHICLE_FLAG_LIMIT_ROLL_ONLY   Removes vertical attraction for changes in vehicle pitch
+VEHICLE_FLAG_MOUSELOOK_BANK    Makes vehicle try to turn toward mouselook direction assuming banking is enabled
+VEHICLE_FLAG_MOUSELOOK_STEER   Makes vehicle try to turn toward mouselook direction
+VEHICLE_FLAG_NO_DEFLECTION_UP     Prevents linear deflection along world-z axis
+VEHICLE_HOVER_EFFICIENCY    A slider between 0 (bouncy) and 1 (critically damped) hover behavior
+VEHICLE_HOVER_HEIGHT     The height the vehicle will try to hover
+VEHICLE_HOVER_TIMESCALE     The period of time for the vehicle to achieve its hover height
+VEHICLE_LINEAR_DEFLECTION_EFFICIENCY A slider between 0 (no deflection) and 1 (maximum strength)
+VEHICLE_LINEAR_DEFLECTION_TIMESCALE  The exponential timescale for the vehicle to redirect its velocity to be along its x-axis
+VEHICLE_LINEAR_FRICTION_TIMESCALE    A vector of timescales for exponential decay of linear velocity along the three vehicle axes
+VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE The exponential timescale for the linear motor's effectiveness to decay toward zero
+VEHICLE_LINEAR_MOTOR_DIRECTION    The linear velocity that the vehicle will try to achieve
+VEHICLE_LINEAR_MOTOR_OFFSET    An offset from the center of mass of the vehicle where the linear motor is applied
+VEHICLE_LINEAR_MOTOR_TIMESCALE    The exponential timescale for the vehicle to achive its full linear motor velocity
+VEHICLE_REFERENCE_FRAME     Rotation of vehicle axes relative to local frame
+VEHICLE_TYPE_AIRPLANE Used with llSetVehicleType to make a vehicle that uses linear deflection for lift, and banking to turn, but doesn't hover
+VEHICLE_TYPE_BALLOON     Used with llSetVehicleType to make a vehicle that uses hover, and friction, but doesn't use deflection
+VEHICLE_TYPE_BOAT  Used with llSetVehicleType to make a vehicle that hovers over water with lots of friction and some angular deflection
+VEHICLE_TYPE_CAR      Used with llSetVehicleType to make a vehicle that bounces along the ground but needs the motors to be driven from external controls or timer events
+VEHICLE_TYPE_NONE  Used with llSetVehicleType to turn off vehicle support
+VEHICLE_TYPE_SLED  Used with llSetVehicleType to make a simple vehicle that bumps along the ground, and likes to move along its local x-axis
+VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY  A slider between 0 (bouncy) and 1 (critically damped) attraction of vehicle z-axis to world z-axis (vertical)
+VEHICLE_VERTICAL_ATTRACTION_TIMESCALE   The exponential timescale for the vehicle to align its z-axis to the world z-axis (vertical)
+VERTICAL   Constant to indicate that the orientation of the capsule for a Pathfinding character is vertical.
+VP_ARCED_EYEBROWS   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_ARM_LENGTH    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_BAGGY_EYES    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_BELLY_SIZE    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_BIG_BROW     Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_BIG_EARS     Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_BODY_FAT     Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_BOWED_LEGS    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_BREAST_FEMALE_CLEAVAGE Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_BREAST_GRAVITY   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_BREAST_SIZE    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_BROAD_NOSTRILS   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_BULBOUS_NOSE    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_BULBOUS_NOSE_TIP   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_BUTT_SIZE    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_CHEST_MALE_NO_PECS  Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_CROOKED_NOSE    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_DEEP_CHIN    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_DOUBLE_CHIN    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_EARS_OUT     Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_EGG_HEAD     Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_EYE_DEPTH    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_EYE_SIZE     Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_EYE_SPACING    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_EYEBROW_SIZE    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_EYELID_CORNER_UP   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_EYELID_INNER_CORNER_UP Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_FACE_SHEAR    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_FOOT_SIZE    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_FOREHEAD_ANGLE   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_HAND_SIZE    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_HEAD_LENGTH    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_HEAD_SHAPE    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_HEAD_SIZE    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_HEEL_HEIGHT    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_HEIGHT     Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_HIGH_CHEEK_BONES   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_HIP_LENGTH    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_HIP_WIDTH    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_JAW_ANGLE    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_JAW_JUT     Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_LEG_LENGTH    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_LEG_MUSCLES    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_LIP_CLEFT_DEEP   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_LIP_RATIO    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_LIP_THICKNESS   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_LIP_WIDTH    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_LOVE_HANDLES    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_LOW_SEPTUM_NOSE   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_LOWER_BRIDGE_NOSE  Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_LOWER_EYEBROWS   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_MALE      Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_MALE_PACKAGE    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_MOUTH_CORNER    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_MOUTH_HEIGHT    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_NECK_LENGTH    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_NECK_THICKNESS   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_NOBLE_NOSE_BRIDGE  Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_NOSE_BIG_OUT    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_PLATFORM_HEIGHT   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_POINTY_EARS    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_POINTY_EYEBROWS   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_PUFFY_LOWER_LIDS   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_PUFFY_UPPER_CHEEKS  Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_SADDLEBAGS    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_SHIFT_MOUTH    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_SHOULDERS    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_SQUARE_JAW    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_SQUASH_STRETCH_HEAD  Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_SUNKEN_CHEEKS   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_TALL_LIPS    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_THICKNESS    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_TORSO_LENGTH    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_TORSO_MUSCLES   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_UPPER_EYELID_FOLD  Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_UPTURNED_NOSE_TIP  Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_WEAK_CHIN    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_WIDE_EYES    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_WIDE_LIP_CLEFT   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_WIDE_NOSE    Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+VP_WIDE_NOSE_BRIDGE   Animesh visual parameter Id for use with llSetAnimatedObjectVisualParams() and llGetAnimatedObjectVisualParams()
+WANDER_PAUSE_AT_WAYPOINTS  Used with llWanderWithin(). Defines if characters should pause after reaching each wander waypoint.
+WATER_BLUR_MULTIPLIER   Returned by llGetEnvironment() or to use with llSetAgentEnvironment(), followed with a float for the multiplier.
+WATER_FOG      Returned by llGetEnvironment() or to use with llSetAgentEnvironment(), followed with vector color, floats density and modulation.
+WATER_FRESNEL     Returned by llGetEnvironment() or to use with llSetAgentEnvironment(), followed with 2 floats for offset and scale.
+WATER_NORMAL_SCALE    Returned by llGetEnvironment() or to use with llSetAgentEnvironment(), followed with a vector for the scale.
+WATER_NORMAL_TEXTURE   For use with llSetAgentEnvironment(), followed with a string containing the UUID of the texture.
+WATER_REFRACTION    Returned by llGetEnvironment() or to use with llSetAgentEnvironment(), followed with 2 floats for scale_above and scale_below.
+WATER_TEXTURE_DEFAULTS   Returned by llGetEnvironment(), followed with two booleans (integers) for normal_is_default and transparent_is_default.
+WATER_WAVE_DIRECTION   Returned by llGetEnvironment() or to use with llSetAgentEnvironment(), followed with 2 vectores for large_wave and small_wave.
+WL_AMBIENT Windlight Ambient Colour
+WL_BIG_WAVE_DIRECTION     Windlight Big Wave Direction
+WL_BLUE_DENSITY     Windlight Blue Density
+WL_BLUR_MULTIPLIER     Windlight Blur Multiplier
+WL_CLOUD_COLOR      Windlight Cloud Colour
+WL_CLOUD_COVERAGE      Windlight Cloud Coverage
+WL_CLOUD_DETAIL_XY_DENSITY   Windlight Cloud Detail X/Y/Density
+WL_CLOUD_SCALE      Windlight Cloud Scale
+WL_CLOUD_SCROLL_X      Windlight Cloud Scroll X
+WL_CLOUD_SCROLL_X_LOCK    Windlight Cloud Scroll X Lock
+WL_CLOUD_SCROLL_Y      Windlight Cloud Scroll Y
+WL_CLOUD_SCROLL_Y_LOCK    Windlight Cloud Scroll Y Lock
+WL_CLOUD_XY_DENSITY    Windlight Cloud X/Y/Density
+WL_DENSITY_MULTIPLIER     Windlight Density Multiplier
+WL_DISTANCE_MULTIPLIER    Windlight Distance Multiplier
+WL_DRAW_CLASSIC_CLOUDS    Windlight Draw Classic Clouds
+WL_EAST_ANGLE Windlight Sun/Position East
+WL_ERROR  Value -2
+WL_ERROR_BAD_SETTING     Value -6
+WL_ERROR_NO_PRESET_FOUND    Value -7
+WL_ERROR_NO_SCENE_SET    Value -3
+WL_ERROR_SCENE_MUST_BE_STATIC  Value -4
+WL_ERROR_SCENE_MUST_NOT_BE_STATIC Value -5
+WL_FRESNEL_OFFSET      Windlight Fresnel Offset
+WL_FRESNEL_SCALE    Windlight Fresnel Scale
+WL_HAZE_DENSITY     Windlight Haze Density
+WL_HAZE_HORIZON     Windlight Haze Horizon
+WL_HORIZON Windlight Horizon Colour
+WL_LITTLE_WAVE_DIRECTION  Windlight Little Wave Direction
+WL_MAX_ALTITUDE     Windlight Max Altitude
+WL_NORMAL_MAP_TEXTURE     Windlight Normal Map Texture
+WL_OK  Value -1
+WL_REFLECTION_WAVELET_SCALE  Windlight Reflection Wavelet Scale
+WL_REFRACT_SCALE_ABOVE    Windlight Refract Scale Above
+WL_REFRACT_SCALE_BELOW    Windlight Refract Scale Below
+WL_SCENE_GAMMA      Windlight Scene Gamma
+WL_STAR_BRIGHTNESS     Windlight Star Brightness
+WL_SUN_GLOW_FOCUS      Windlight Sun Glow Focus
+WL_SUN_GLOW_SIZE    Windlight Sun Glow Size
+WL_SUN_MOON_COLOR      Windlight Sun/Moon Colour
+WL_SUN_MOON_POSITION   Windlight Sun/Moon Position
+WL_UNDERWATER_FOG_MODIFIER   Windlight Underwater Fog Modifier
+WL_WATER_COLOR      Windlight Water Colour
+WL_WATER_FOG_DENSITY_EXPONENT   Windlight Water Fog Density Exponent
+XP_ERROR_EXPERIENCE_DISABLED The experience owner has temporarily disabled the experience.
+XP_ERROR_EXPERIENCE_SUSPENDED The experience has been suspended by Linden Customer Support.
+XP_ERROR_EXPERIENCES_DISABLED The region currently has experiences disabled.
+XP_ERROR_INVALID_EXPERIENCE  The script is associated with an experience that no longer exists.
+XP_ERROR_INVALID_PARAMETERS  One of the string arguments was too big to fit in the key-value store.
+XP_ERROR_KEY_NOT_FOUND   The requested key does not exist.
+XP_ERROR_MATURITY_EXCEEDED  The request failed due to agent content preferences.
+XP_ERROR_NO_EXPERIENCE   This script is not associated with an experience.
+XP_ERROR_NONE     No error was detected
+XP_ERROR_NOT_FOUND    The sim was unable to verify the validity of the experience. Retrying after a short wait is advised.
+XP_ERROR_NOT_PERMITTED   This experience is not allowed to run on the current region.
+XP_ERROR_QUOTA_EXCEEDED   An attempted write data to the key-value store failed due to the data quota being met.
+XP_ERROR_RETRY_UPDATE   A checked update failed due to an out of date request.
+XP_ERROR_STORAGE_EXCEPTION  Unable to communicate with the key-value store.
+XP_ERROR_STORE_DISABLED   The key-value store is currently disabled on this region.
+XP_ERROR_THROTTLED    The call failed due to too many recent calls.
+XP_ERROR_UNKNOWN_ERROR   Other unknown error.

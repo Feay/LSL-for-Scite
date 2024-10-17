@@ -1,0 +1,16 @@
+#place at bottom of SciTeGlobal.properties is global options
+#for better global main colors
+#grey background, except current line is white
+#darker grey line numbers background
+
+# main back ground but not current line background, 
+#nor already styled highlighing
+style.*.32=$(font.base),back:#e0e0e0,fore:#000000
+#line numbers background and font color
+style.*.33=back:#AAAAAA,$(font.base),fore:#000000
+#current line
+caret.line.back=#FFFEF8
+#cusor color
+caret.fore=#FF00FF
+caret.width=2
+# caret.width=1
