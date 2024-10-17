@@ -3,7 +3,8 @@ edit your Secondlife and OpenSim scripts off line and with a BETTER editor!!!
 
 What is needed??
 THese Files: lsl.api lsl.properties, Scite editor, and lslint
-I am adding the last windows installer to this release with lslint for convenice...
+I have packed the files into the release. 
+I made a install.bat that should copy for you, under windows
 
 Scite is a FAST text editor with syntax hightlighing and hooks to run what you are editing in external compilers, 
 or repels for error checking. Please web serch to find precompiled executibles for windows! 
